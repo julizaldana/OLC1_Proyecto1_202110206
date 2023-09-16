@@ -1,0 +1,51 @@
+package AnalizadorJson;
+import java_cup.runtime.*;
+
+parser code {:
+    public void syntax_error(Symbol s){
+        System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+    }
+    String tmp="";
+
+        //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
+        public List<String> resultados = new ArrayList<String>();
+
+:}
+
+
+
+
+/* Terminales */
+terminal COMILLA;
+terminal STRING;
+terminal LLAV_A;
+terminal DOUBLE;
+terminal COMA;
+terminal DOSPTS;
+terminal LLAV_C;
+
+/* No Terminales */
+nonterminal inicio, elementos, elemento, clave, valor, lista;
+
+/* Producciones */
+start with inicio;
+
+inicio ::= LLAV_A elementos LLAV_C;
+
+elementos ::= elemento
+            | elementos COMA elemento;
+
+elemento ::= clave DOSPTS valor;
+
+clave ::= STRING;
+
+valor ::= STRING
+        | DOUBLE
+        | LLAV_A lista LLAV_C;
+
+lista ::= valor
+        | lista COMA valor;
