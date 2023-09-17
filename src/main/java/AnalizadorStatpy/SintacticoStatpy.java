@@ -5,9 +5,9 @@
 
 package AnalizadorStatpy;
 
+import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
-import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -33,13 +33,20 @@ public class SintacticoStatpy extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\024\000\002\002\004\000\002\004\003\000\002\005" +
-    "\004\000\002\005\003\000\002\013\002\000\002\014\002" +
-    "\000\002\006\015\000\002\015\002\000\002\011\006\000" +
-    "\002\011\003\000\002\012\004\000\002\007\004\000\002" +
-    "\007\003\000\002\010\007\000\002\010\007\000\002\003" +
-    "\003\000\002\003\003\000\002\003\003\000\002\002\003" +
-    "\000\002\002\003" });
+    "\000\052\000\002\002\004\000\002\010\003\000\002\011" +
+    "\004\000\002\011\003\000\002\016\002\000\002\017\002" +
+    "\000\002\012\013\000\002\015\004\000\002\013\004\000" +
+    "\002\013\003\000\002\014\005\000\002\014\007\000\002" +
+    "\014\007\000\002\014\011\000\002\002\003\000\002\002" +
+    "\003\000\002\002\003\000\002\002\003\000\002\002\003" +
+    "\000\002\003\003\000\002\003\003\000\002\003\003\000" +
+    "\002\004\005\000\002\004\005\000\002\005\003\000\002" +
+    "\005\003\000\002\005\003\000\002\006\003\000\002\006" +
+    "\003\000\002\006\003\000\002\006\003\000\002\006\003" +
+    "\000\002\006\003\000\002\006\003\000\002\006\003\000" +
+    "\002\006\003\000\002\006\003\000\002\006\003\000\002" +
+    "\006\003\000\002\006\003\000\002\007\003\000\002\007" +
+    "\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -47,33 +54,69 @@ public class SintacticoStatpy extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\050\000\006\011\005\012\004\001\002\000\010\007" +
-    "\uffee\010\uffee\013\uffee\001\002\000\010\007\uffef\010\uffef" +
-    "\013\uffef\001\002\000\010\002\ufffe\011\ufffe\012\ufffe\001" +
-    "\002\000\010\007\015\010\016\013\014\001\002\000\010" +
-    "\002\000\011\005\012\004\001\002\000\004\002\012\001" +
-    "\002\000\004\002\001\001\002\000\010\002\uffff\011\uffff" +
-    "\012\uffff\001\002\000\004\004\ufff0\001\002\000\004\004" +
-    "\ufff2\001\002\000\004\004\ufff1\001\002\000\004\004\020" +
-    "\001\002\000\004\014\021\001\002\000\010\007\ufffd\010" +
-    "\ufffd\013\ufffd\001\002\000\010\007\015\010\016\013\014" +
-    "\001\002\000\006\015\ufff8\020\ufff8\001\002\000\006\015" +
-    "\030\020\027\001\002\000\004\004\026\001\002\000\006" +
-    "\015\ufff7\020\ufff7\001\002\000\010\007\ufffa\010\ufffa\013" +
-    "\ufffa\001\002\000\004\016\031\001\002\000\012\007\ufffc" +
-    "\010\ufffc\013\ufffc\023\ufffc\001\002\000\012\007\015\010" +
-    "\016\013\014\023\033\001\002\000\004\014\045\001\002" +
-    "\000\014\007\ufff5\010\ufff5\013\ufff5\017\ufff5\023\ufff5\001" +
-    "\002\000\004\004\041\001\002\000\014\007\015\010\016" +
-    "\013\014\017\040\023\033\001\002\000\014\007\ufff6\010" +
-    "\ufff6\013\ufff6\017\ufff6\023\ufff6\001\002\000\010\002\ufffb" +
-    "\011\ufffb\012\ufffb\001\002\000\004\022\042\001\002\000" +
-    "\004\005\043\001\002\000\004\021\044\001\002\000\014" +
-    "\007\ufff4\010\ufff4\013\ufff4\017\ufff4\023\ufff4\001\002\000" +
-    "\004\006\046\001\002\000\004\015\047\001\002\000\004" +
-    "\021\050\001\002\000\014\007\ufff3\010\ufff3\013\ufff3\017" +
-    "\ufff3\023\ufff3\001\002\000\010\007\015\010\016\013\014" +
-    "\001\002\000\006\015\ufff9\020\ufff9\001\002" });
+    "\000\077\000\004\016\005\001\002\000\006\002\ufffe\016" +
+    "\ufffe\001\002\000\004\017\012\001\002\000\006\002\000" +
+    "\016\005\001\002\000\004\002\010\001\002\000\004\002" +
+    "\001\001\002\000\006\002\uffff\016\uffff\001\002\000\004" +
+    "\041\013\001\002\000\004\042\ufffd\001\002\000\004\042" +
+    "\015\001\002\000\004\043\016\001\002\000\016\007\ufffc" +
+    "\010\ufffc\011\ufffc\012\ufffc\013\ufffc\021\ufffc\001\002\000" +
+    "\016\007\023\010\027\011\030\012\021\013\025\021\026" +
+    "\001\002\000\020\007\ufff8\010\ufff8\011\ufff8\012\ufff8\013" +
+    "\ufff8\021\ufff8\044\ufff8\001\002\000\004\004\ufff0\001\002" +
+    "\000\020\007\023\010\027\011\030\012\021\013\025\021" +
+    "\026\044\101\001\002\000\004\004\ufff3\001\002\000\004" +
+    "\004\041\001\002\000\004\004\uffef\001\002\000\004\020" +
+    "\031\001\002\000\004\004\ufff2\001\002\000\004\004\ufff1" +
+    "\001\002\000\004\022\032\001\002\000\004\041\033\001" +
+    "\002\000\006\004\034\006\036\001\002\000\004\042\uffd8" +
+    "\001\002\000\004\042\037\001\002\000\004\042\uffd9\001" +
+    "\002\000\004\046\040\001\002\000\020\007\ufff4\010\ufff4" +
+    "\011\ufff4\012\ufff4\013\ufff4\021\ufff4\044\ufff4\001\002\000" +
+    "\006\046\042\047\043\001\002\000\020\007\ufff7\010\ufff7" +
+    "\011\ufff7\012\ufff7\013\ufff7\021\ufff7\044\ufff7\001\002\000" +
+    "\010\004\045\005\051\023\046\001\002\000\034\024\055" +
+    "\025\066\026\056\027\061\030\062\031\054\032\065\033" +
+    "\053\034\063\035\060\036\052\037\067\040\064\001\002" +
+    "\000\036\024\uffe9\025\uffe9\026\uffe9\027\uffe9\030\uffe9\031" +
+    "\uffe9\032\uffe9\033\uffe9\034\uffe9\035\uffe9\036\uffe9\037\uffe9" +
+    "\040\uffe9\046\uffec\001\002\000\036\024\uffe7\025\uffe7\026" +
+    "\uffe7\027\uffe7\030\uffe7\031\uffe7\032\uffe7\033\uffe7\034\uffe7" +
+    "\035\uffe7\036\uffe7\037\uffe7\040\uffe7\046\uffed\001\002\000" +
+    "\004\046\075\001\002\000\036\024\055\025\066\026\056" +
+    "\027\061\030\062\031\054\032\065\033\053\034\063\035" +
+    "\060\036\052\037\067\040\064\046\070\001\002\000\036" +
+    "\024\uffe8\025\uffe8\026\uffe8\027\uffe8\030\uffe8\031\uffe8\032" +
+    "\uffe8\033\uffe8\034\uffe8\035\uffe8\036\uffe8\037\uffe8\040\uffe8" +
+    "\046\uffee\001\002\000\010\004\uffdc\005\uffdc\023\uffdc\001" +
+    "\002\000\010\004\uffdf\005\uffdf\023\uffdf\001\002\000\010" +
+    "\004\uffe1\005\uffe1\023\uffe1\001\002\000\010\004\uffe6\005" +
+    "\uffe6\023\uffe6\001\002\000\010\004\uffe4\005\uffe4\023\uffe4" +
+    "\001\002\000\010\004\072\005\074\023\073\001\002\000" +
+    "\010\004\uffdd\005\uffdd\023\uffdd\001\002\000\010\004\uffe3" +
+    "\005\uffe3\023\uffe3\001\002\000\010\004\uffe2\005\uffe2\023" +
+    "\uffe2\001\002\000\010\004\uffde\005\uffde\023\uffde\001\002" +
+    "\000\010\004\uffda\005\uffda\023\uffda\001\002\000\010\004" +
+    "\uffe0\005\uffe0\023\uffe0\001\002\000\010\004\uffe5\005\uffe5" +
+    "\023\uffe5\001\002\000\010\004\uffdb\005\uffdb\023\uffdb\001" +
+    "\002\000\020\007\ufff5\010\ufff5\011\ufff5\012\ufff5\013\ufff5" +
+    "\021\ufff5\044\ufff5\001\002\000\036\024\uffeb\025\uffeb\026" +
+    "\uffeb\027\uffeb\030\uffeb\031\uffeb\032\uffeb\033\uffeb\034\uffeb" +
+    "\035\uffeb\036\uffeb\037\uffeb\040\uffeb\046\uffeb\001\002\000" +
+    "\036\024\uffe9\025\uffe9\026\uffe9\027\uffe9\030\uffe9\031\uffe9" +
+    "\032\uffe9\033\uffe9\034\uffe9\035\uffe9\036\uffe9\037\uffe9\040" +
+    "\uffe9\046\uffe9\001\002\000\036\024\uffe7\025\uffe7\026\uffe7" +
+    "\027\uffe7\030\uffe7\031\uffe7\032\uffe7\033\uffe7\034\uffe7\035" +
+    "\uffe7\036\uffe7\037\uffe7\040\uffe7\046\uffe7\001\002\000\036" +
+    "\024\uffe8\025\uffe8\026\uffe8\027\uffe8\030\uffe8\031\uffe8\032" +
+    "\uffe8\033\uffe8\034\uffe8\035\uffe8\036\uffe8\037\uffe8\040\uffe8" +
+    "\046\uffe8\001\002\000\020\007\ufff6\010\ufff6\011\ufff6\012" +
+    "\ufff6\013\ufff6\021\ufff6\044\ufff6\001\002\000\010\004\072" +
+    "\005\074\023\073\001\002\000\036\024\uffea\025\uffea\026" +
+    "\uffea\027\uffea\030\uffea\031\uffea\032\uffea\033\uffea\034\uffea" +
+    "\035\uffea\036\uffea\037\uffea\040\uffea\046\uffea\001\002\000" +
+    "\020\007\ufff9\010\ufff9\011\ufff9\012\ufff9\013\ufff9\021\ufff9" +
+    "\044\ufff9\001\002\000\006\002\ufffb\016\ufffb\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -81,22 +124,29 @@ public class SintacticoStatpy extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\050\000\012\002\006\004\010\005\007\006\005\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\003\016\001\001\000\006\002\006\006\012\001" +
+    "\000\077\000\010\010\006\011\005\012\003\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\012\010\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\016\013\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\017\016\001\001\000\010\002" +
+    "\023\013\021\014\017\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\002\023\014\077\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\013\021\001\001" +
-    "\000\010\003\024\011\023\012\022\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\015\050\001\001\000\002\001\001\000\004\014" +
-    "\031\001\001\000\010\003\034\007\035\010\033\001\001" +
+    "\002\001\001\000\004\007\034\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\003\034\010\036\001\001\000\002\001\001\000\002" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\010" +
+    "\003\046\004\047\005\043\001\001\000\004\006\075\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\006\056\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\005\070\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\003\024\012" +
-    "\051\001\001\000\002\001\001" });
+    "\001\000\004\005\076\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -143,13 +193,20 @@ public class SintacticoStatpy extends java_cup.runtime.lr_parser {
         System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
     String tmp="";
+    String opr="";
 
 
 //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultadosSP = new ArrayList<String>();
-    
+
+//Lista para almacenar resultados traducidos
     public ArrayList<String> translationResults = new ArrayList<>();
-    
+
+// Para retornar resultados traducidos
+  public ArrayList<String> getTranslationResults() {
+        return translationResults;
+    }
+
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -194,24 +251,20 @@ class CUP$SintacticoStatpy$actions {
           case 1: // INICIO ::= SENTENCIAS 
             {
               Object RESULT =null;
-                    
-              //Almacena los resultados en una array list
+		
                     System.out.println(tmp);
-                    translationResults.add(tmp);
                     tmp="";
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("INICIO",2, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("INICIO",6, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
-  
-          
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 2: // SENTENCIAS ::= SENTENCIAS S 
             {
               Object RESULT =null;
 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SENTENCIAS",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SENTENCIAS",7, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
@@ -220,7 +273,7 @@ class CUP$SintacticoStatpy$actions {
             {
               Object RESULT =null;
 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SENTENCIAS",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SENTENCIAS",7, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
@@ -228,101 +281,59 @@ class CUP$SintacticoStatpy$actions {
           case 4: // NT$0 ::= 
             {
               Object RESULT =null;
-		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).left;
-		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).right;
-		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).value;
-		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
-		int tipright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
-		String tip = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
-		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
+		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
+		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
+		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
+		int maileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int mairight = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String mai = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
 
-                if(!tip.equalsIgnoreCase("void")){
-                        tmp+="funcion "+vi+" "+tip+" "+id+"(";
-                    }else{
-                        tmp+="metodo "+vi+" "+id+"(";
-                    }
+                       
+         tmp+="def" + " " + mai + "(";
+                    
     
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("NT$0",9, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("NT$0",12, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // NT$1 ::= 
             {
-              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).value;
-		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).left;
-		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).right;
-		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).value;
-		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-6)).left;
-		int tipright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-6)).right;
-		String tip = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-6)).value;
-		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).value;
+              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
+		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).left;
+		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).right;
+		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-5)).value;
+		int maileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).left;
+		int mairight = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).right;
+		String mai = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).value;
 
-                    tmp+=")"+"{\n";
+                    tmp+=")"+":\n";
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("NT$1",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("NT$1",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // S ::= VIS TIPO ID PAR_A NT$0 LIST PAR_C LLAV_A NT$1 CUERPO LLAV_C 
+          case 6: // S ::= VOI MAIN PAR_A NT$0 PAR_C LLAV_A NT$1 CUERPO LLAV_C 
             {
               Object RESULT =null;
               // propagate RESULT from NT$1
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
-		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-10)).left;
-		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-10)).right;
-		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-10)).value;
-		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-9)).left;
-		int tipright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-9)).right;
-		String tip = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-9)).value;
-		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).value;
+		int vileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).left;
+		int viright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).right;
+		String vi = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)).value;
+		int maileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).left;
+		int mairight = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).right;
+		String mai = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-7)).value;
 		
-                    tmp+="}\n";
+                    tmp+="if__name__ = “__main__”:\n" + " " + mai + "()";
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("S",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-10)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("S",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-8)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // NT$2 ::= 
-            {
-              Object RESULT =null;
-
-                    tmp+=",";
-                
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("NT$2",11, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
-            }
-          return CUP$SintacticoStatpy$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // LIST ::= LIST COMA NT$2 L 
-            {
-              Object RESULT =null;
-              // propagate RESULT from NT$2
-                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
-
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("LIST",7, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
-            }
-          return CUP$SintacticoStatpy$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // LIST ::= L 
-            {
-              Object RESULT =null;
-
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("LIST",7, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
-            }
-          return CUP$SintacticoStatpy$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // L ::= TIPO ID 
+          case 7: // L ::= TIPO ID 
             {
               Object RESULT =null;
 		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
@@ -334,30 +345,45 @@ class CUP$SintacticoStatpy$actions {
 		
                     tmp+=tip+" "+id;
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("L",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("L",11, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // CUERPO ::= CUERPO C 
+          case 8: // CUERPO ::= CUERPO C 
             {
               Object RESULT =null;
 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("CUERPO",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("CUERPO",9, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // CUERPO ::= C 
+          case 9: // CUERPO ::= C 
             {
               Object RESULT =null;
 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("CUERPO",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("CUERPO",9, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // C ::= TIPO ID ASIGNA ENTERO PYCOMA 
+          case 10: // C ::= TIPO ID PYCOMA 
+            {
+              Object RESULT =null;
+		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
+		int tipright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
+		String tip = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // C ::= TIPO ID ASIGNA EXPRESION PYCOMA 
             {
               Object RESULT =null;
 		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).left;
@@ -366,97 +392,423 @@ class CUP$SintacticoStatpy$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).value;
-		int numleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
-		int numright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
-		String num = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
+		int expleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int expright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String exp = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
 		
-                    tmp+=tip+" "+id+"="+num+";\n";
+                    tmp+=id+" "+"="+" "+exp+"\n";
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",6, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // C ::= PRINT PAR_A CADENA PAR_C PYCOMA 
+          case 12: // C ::= TIPO ID ASIGNA OPERACION PYCOMA 
             {
               Object RESULT =null;
-		int cadleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
-		int cadright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
-		String cad = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
+		int tipleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).left;
+		int tipright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).right;
+		String tip = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-3)).value;
+		int oprleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int oprright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String opr = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
 		
-                    tmp+="imprimir("+cad+");\n";
+                    tmp+=id+" "+"="+" "+opr;
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",6, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // TIPO ::= INT1 
+          case 13: // C ::= CONSOLE PUNTO WRITE PAR_A VARPRINT PAR_C PYCOMA 
             {
-              String RESULT =null;
-		int inleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
-		int inright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
-		String in = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+              Object RESULT =null;
+		int varprintleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
+		int varprintright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
+		String varprint = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
 		
-                    RESULT=in;
+                    tmp+="print("+varprint+")\n";
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("C",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-6)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // TIPO ::= CHAR1 
+          case 14: // TIPO ::= INT1 
             {
               String RESULT =null;
-		int chleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
-		int chright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
-		String ch = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
-		
-                    RESULT=ch;
-                
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // TIPO ::= VOI 
+          case 15: // TIPO ::= CHAR1 
             {
               String RESULT =null;
-		int voleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
-		int voright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
-		String vo = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
-		
-                    RESULT=vo;
-                
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // VIS ::= PUB 
+          case 16: // TIPO ::= DOUBLE1 
             {
               String RESULT =null;
-		int puleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
-		int puright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
-		String pu = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
-		
-                    RESULT=pu;
-                
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("VIS",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // VIS ::= PRI 
+          case 17: // TIPO ::= BOOL1 
             {
               String RESULT =null;
-		int prleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
-		int prright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
-		String pr = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // TIPO ::= STRING1 
+            {
+              String RESULT =null;
+
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("TIPO",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // EXPRESION ::= ENTERO 
+            {
+              String RESULT =null;
+		int numeleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int numeright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String nume = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
 		
-                    RESULT=pr;
+                    RESULT=nume;
                 
-              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("VIS",0, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("EXPRESION",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // EXPRESION ::= DOUBLE 
+            {
+              String RESULT =null;
+		int dbleleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int dbleright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String dble = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=dble;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("EXPRESION",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // EXPRESION ::= ID 
+            {
+              String RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=id;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("EXPRESION",1, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // OPERACION ::= OPERACION SIGNO OP 
+            {
+              String RESULT =null;
+		int signoleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int signoright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String signo = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT = " " + signo + " " + op +"\n";
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("OPERACION",2, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // OPERACION ::= OP SIGNO OP 
+            {
+              String RESULT =null;
+		int op1left = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).left;
+		int op1right = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).right;
+		String op1 = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)).value;
+		int signo1left = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).left;
+		int signo1right = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).right;
+		String signo1 = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-1)).value;
+		int op2left = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int op2right = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String op2 = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		  
+                    RESULT = op1 + " " + signo1 + " " + op2 +"\n";
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("OPERACION",2, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.elementAt(CUP$SintacticoStatpy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // OP ::= ID 
+            {
+              String RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=id;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("OP",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // OP ::= ENTERO 
+            {
+              String RESULT =null;
+		int numeleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int numeright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String nume = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=nume;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("OP",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // OP ::= DOUBLE 
+            {
+              String RESULT =null;
+		int dbleleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int dbleright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String dble = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=dble;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("OP",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 27: // SIGNO ::= SUMA 
+            {
+              String RESULT =null;
+		int sumleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int sumright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String sum = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=sum;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 28: // SIGNO ::= RESTA 
+            {
+              String RESULT =null;
+		int restaleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int restaright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String resta = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=resta;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // SIGNO ::= MULT 
+            {
+              String RESULT =null;
+		int multleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int multright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String mult = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=mult;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 30: // SIGNO ::= DIV 
+            {
+              String RESULT =null;
+		int divleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int divright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String div = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=div;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // SIGNO ::= MAYOR 
+            {
+              String RESULT =null;
+		int mayorleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int mayorright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String mayor = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=mayor;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // SIGNO ::= MENOR 
+            {
+              String RESULT =null;
+		int menorleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int menorright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String menor = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=menor;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // SIGNO ::= MAYOR_I 
+            {
+              String RESULT =null;
+		int mayorileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int mayoriright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String mayori = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=mayori;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 34: // SIGNO ::= MENOR_I 
+            {
+              String RESULT =null;
+		int menorileft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int menoriright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String menori = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=menori;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // SIGNO ::= IGUAL 
+            {
+              String RESULT =null;
+		int iguleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int iguright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String igu = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=igu;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 36: // SIGNO ::= DIST 
+            {
+              String RESULT =null;
+		int distleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int distright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String dist = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=dist;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 37: // SIGNO ::= AND 
+            {
+              String RESULT =null;
+		int andleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int andright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String and = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=and;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 38: // SIGNO ::= OR 
+            {
+              String RESULT =null;
+		int orleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int orright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String or = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=or;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 39: // SIGNO ::= NOT 
+            {
+              String RESULT =null;
+		int notleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int notright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String not = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                   RESULT=not;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("SIGNO",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 40: // VARPRINT ::= CADENA 
+            {
+              String RESULT =null;
+		int cadleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int cadright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String cad = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=cad;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("VARPRINT",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatpy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 41: // VARPRINT ::= ID 
+            {
+              String RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatpy$stack.peek()).value;
+		
+                    RESULT=id;
+                
+              CUP$SintacticoStatpy$result = parser.getSymbolFactory().newSymbol("VARPRINT",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatpy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatpy$result;
 
@@ -468,8 +820,6 @@ class CUP$SintacticoStatpy$actions {
         }
     } /* end of method */
 
-
-  
   /** Method splitting the generated action code into several parts. */
   public final java_cup.runtime.Symbol CUP$SintacticoStatpy$do_action(
     int                        CUP$SintacticoStatpy$act_num,
@@ -485,10 +835,5 @@ class CUP$SintacticoStatpy$actions {
                                CUP$SintacticoStatpy$top);
     }
 }
-
-  public ArrayList<String> getTranslationResults() {
-        return translationResults;
-    }
-  
 
 }

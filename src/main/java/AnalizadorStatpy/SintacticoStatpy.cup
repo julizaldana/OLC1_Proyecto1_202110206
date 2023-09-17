@@ -1,5 +1,8 @@
 package AnalizadorStatpy;
 import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 parser code {:
     public void syntax_error(Symbol s){
@@ -10,19 +13,29 @@ parser code {:
         System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
     String tmp="";
+    String opr="";
 
 
 //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultadosSP = new ArrayList<String>();
 
+//Lista para almacenar resultados traducidos
+    public ArrayList<String> translationResults = new ArrayList<>();
+
+// Para retornar resultados traducidos
+  public ArrayList<String> getTranslationResults() {
+        return translationResults;
+    }
 
 :}
-terminal String ID,ENTERO,CADENA,INT1,CHAR1,PUB,PRI,VOI;
-terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA,PRINT;
+
+terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,CONSOLE,WRITE,DOUBLE;
+terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, DIST, AND, OR, NOT;
+terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
-nonterminal String VIS,TIPO;
-nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, LIST, L;
+nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT;
+nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, L;
 
 start with INICIO;
 
@@ -36,31 +49,22 @@ INICIO ::= SENTENCIAS
 SENTENCIAS ::= SENTENCIAS S
     |S
 ;
-S ::= VIS:vi TIPO:tip ID:id PAR_A   {:
-                if(!tip.equalsIgnoreCase("void")){
-                        tmp+="funcion "+vi+" "+tip+" "+id+"(";
-                    }else{
-                        tmp+="metodo "+vi+" "+id+"(";
-                    }
+S ::= VOI:vi MAIN:mai PAR_A   {:
+                       
+         tmp+="def" + " " + mai + "(";
+                    
     :}
-    LIST PAR_C LLAV_A
+    PAR_C LLAV_A
                 {:
-                    tmp+=")"+"{\n";
+                    tmp+=")"+":\n";
                 :}
                 CUERPO LLAV_C
                 {:
-                    tmp+="}\n";
+                    tmp+="if__name__ = “__main__”:\n" + " " + mai + "()";
                 :}
 
 ;
-LIST ::= LIST COMA
-                {:
-                    tmp+=",";
-                :} 
-    L
 
-    | L
-;
 L ::= TIPO:tip ID:id
                 {:
                     tmp+=tip+" "+id;
@@ -69,35 +73,136 @@ L ::= TIPO:tip ID:id
 CUERPO ::= CUERPO C
     | C
 ;
-C ::= TIPO:tip ID:id ASIGNA ENTERO:num PYCOMA 
+C ::= TIPO:tip ID:id PYCOMA
+
+    | TIPO:tip ID:id ASIGNA EXPRESION:exp PYCOMA
                 {:
-                    tmp+=tip+" "+id+"="+num+";\n";
+                    tmp+=id+" "+"="+" "+exp+"\n";
                 :}
-    |PRINT PAR_A CADENA:cad PAR_C PYCOMA
+
+    | TIPO:tip ID:id ASIGNA OPERACION:opr PYCOMA
                 {:
-                    tmp+="imprimir("+cad+");\n";
+                    tmp+=id+" "+"="+" "+opr;
+                :}
+       
+    |CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    tmp+="print("+varprint+")\n";
                 :}
 ;
-TIPO ::= INT1:in 
+TIPO ::= INT1 
+
+    | CHAR1
+
+    | DOUBLE1
+
+    | BOOL1
+
+    | STRING1
+
+;
+
+EXPRESION ::= ENTERO:nume
                 {:
-                    RESULT=in;
+                    RESULT=nume;
                 :}
-    | CHAR1:ch
+    | DOUBLE:dble
                 {:
-                    RESULT=ch;
+                    RESULT=dble;
                 :}
-    | VOI:vo
+    | ID:id
                 {:
-                    RESULT=vo;
+                    RESULT=id;
                 :}
 ;
 
-VIS ::= PUB:pu
+
+OPERACION ::= OPERACION SIGNO:signo OP:op
                 {:
-                    RESULT=pu;
+                    RESULT = " " + signo + " " + op +"\n";
                 :}
-    | PRI:pr 
+    | OP:op1 SIGNO:signo1 OP:op2
+                {:  
+                    RESULT = op1 + " " + signo1 + " " + op2 +"\n";
+                :}             
+;
+
+
+OP ::= ID:id
                 {:
-                    RESULT=pr;
+                    RESULT=id;
+                :}
+    | ENTERO:nume
+                {:
+                    RESULT=nume;
+                :}
+    | DOUBLE:dble
+                {:
+                    RESULT=dble;
+                :}
+;
+
+
+SIGNO ::= SUMA:sum
+                {:
+                    RESULT=sum;
+                :}
+    | RESTA:resta
+                {:
+                    RESULT=resta;
+                :}
+    | MULT:mult
+                {:
+                    RESULT=mult;
+                :}
+    | DIV:div
+                {:
+                    RESULT=div;
+                :}
+    | MAYOR:mayor
+                {:
+                    RESULT=mayor;
+                :}
+    | MENOR:menor
+                {:
+                    RESULT=menor;
+                :}
+    | MAYOR_I:mayori
+                {:
+                    RESULT=mayori;
+                :}
+    | MENOR_I:menori
+                {:
+                    RESULT=menori;
+                :}
+    | IGUAL:igu
+                {:
+                    RESULT=igu;
+                :}
+    | DIST:dist
+                {:
+                    RESULT=dist;
+                :}
+    | AND:and
+                {:
+                    RESULT=and;
+                :}
+    | OR:or
+                {:
+                    RESULT=or;
+                :}
+    | NOT:not
+                {:
+                   RESULT=not;
+                :}
+;
+
+VARPRINT ::= CADENA:cad
+                {:
+                    RESULT=cad;
+                :}
+    | ID:id
+                {:
+                    RESULT=id;
                 :}
 ;

@@ -8,24 +8,44 @@ package AnalizadorStatpy;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int PYCOMA = 15;
-  public static final int CADENA = 4;
-  public static final int LLAV_C = 13;
-  public static final int LLAV_A = 12;
-  public static final int PAR_C = 11;
-  public static final int PAR_A = 10;
-  public static final int ID = 2;
-  public static final int COMA = 14;
   public static final int INT1 = 5;
-  public static final int EOF = 0;
-  public static final int PRI = 8;
-  public static final int PRINT = 17;
-  public static final int error = 1;
-  public static final int PUB = 7;
-  public static final int ASIGNA = 16;
+  public static final int MULT = 20;
   public static final int ENTERO = 3;
+  public static final int DOUBLE = 17;
+  public static final int RESTA = 19;
+  public static final int PRI = 11;
+  public static final int WRITE = 16;
+  public static final int PUB = 10;
+  public static final int NOT = 30;
+  public static final int AND = 28;
+  public static final int IGUAL = 26;
+  public static final int OR = 29;
+  public static final int STRING1 = 9;
+  public static final int DIV = 21;
+  public static final int ASIGNA = 37;
   public static final int CHAR1 = 6;
-  public static final int VOI = 9;
+  public static final int SUMA = 18;
+  public static final int MAIN = 13;
+  public static final int LLAV_C = 34;
+  public static final int ID = 2;
+  public static final int LLAV_A = 33;
+  public static final int PYCOMA = 36;
+  public static final int DIST = 27;
+  public static final int VOI = 12;
+  public static final int EOF = 0;
+  public static final int error = 1;
+  public static final int MAYOR_I = 24;
+  public static final int COMA = 35;
+  public static final int CADENA = 4;
+  public static final int MENOR = 23;
+  public static final int PAR_C = 32;
+  public static final int MENOR_I = 25;
+  public static final int PAR_A = 31;
+  public static final int MAYOR = 22;
+  public static final int PUNTO = 14;
+  public static final int BOOL1 = 8;
+  public static final int DOUBLE1 = 7;
+  public static final int CONSOLE = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -34,17 +54,37 @@ public class sym {
   "CADENA",
   "INT1",
   "CHAR1",
+  "DOUBLE1",
+  "BOOL1",
+  "STRING1",
   "PUB",
   "PRI",
   "VOI",
+  "MAIN",
+  "PUNTO",
+  "CONSOLE",
+  "WRITE",
+  "DOUBLE",
+  "SUMA",
+  "RESTA",
+  "MULT",
+  "DIV",
+  "MAYOR",
+  "MENOR",
+  "MAYOR_I",
+  "MENOR_I",
+  "IGUAL",
+  "DIST",
+  "AND",
+  "OR",
+  "NOT",
   "PAR_A",
   "PAR_C",
   "LLAV_A",
   "LLAV_C",
   "COMA",
   "PYCOMA",
-  "ASIGNA",
-  "PRINT"
+  "ASIGNA"
   };
 }
 
