@@ -29,12 +29,15 @@ parser code {:
 
 :}
 
-terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,CONSOLE,WRITE,DOUBLE;
+terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,CONSOLE,WRITE,DOUBLE,DECIMAL,comentario,comentario2;
 terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, DIST, AND, OR, NOT;
+terminal String COMILLA_S;
+terminal String IF, ELSEIF;
 terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
-nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT;
+nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT, TERMINO, VARPRINT2;
+nonterminal String IFSTATE, ELIFSTATE, IFARG, ELIFARG, OPERIFS, CUERPOIF, CUERPOELIF, MOREIFS, MORELIFS, MOREPRINTS;
 nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, L;
 
 start with INICIO;
@@ -48,6 +51,14 @@ INICIO ::= SENTENCIAS
 ;
 SENTENCIAS ::= SENTENCIAS S
     |S
+    | comentario:com
+                {:
+                    tmp+=com+"\n";
+                :}
+    | comentario2:com2
+                {:
+                    tmp+=com2+"\n";
+                :}
 ;
 S ::= VOI:vi MAIN:mai PAR_A   {:
                        
@@ -62,7 +73,6 @@ S ::= VOI:vi MAIN:mai PAR_A   {:
                 {:
                     tmp+="if__name__ = “__main__”:\n" + " " + mai + "()";
                 :}
-
 ;
 
 L ::= TIPO:tip ID:id
@@ -89,7 +99,19 @@ C ::= TIPO:tip ID:id PYCOMA
                 {:
                     tmp+="print("+varprint+")\n";
                 :}
+    | IFSTATE 
+    | ELIFSTATE 
+    | comentario:com
+                {:
+                    tmp+=com+"\n";
+                :}
+    | comentario2:com2
+                {:
+                    tmp+=com2+"\n";
+                :}
 ;
+
+
 TIPO ::= INT1 
 
     | CHAR1
@@ -100,6 +122,116 @@ TIPO ::= INT1
 
     | STRING1
 
+;
+
+
+IFSTATE ::= IF:ifpy PAR_A IFARG:arg 
+                {:
+                    tmp += ifpy + " " + arg;
+                :}
+;
+
+ELIFSTATE ::= ELSEIF PAR_A ELIFARG:elsearg  
+                {:
+                    tmp += "elif" + " " + elsearg;
+                :}
+;
+
+IFARG ::= OPERIFS:oper PAR_C LLAV_A CUERPOIF:cuerpoif LLAV_C 
+                        {:
+                RESULT=oper + ":"+"\n" +
+                     "   " + cuerpoif;
+                        :}
+    | ID:id PAR_C LLAV_A CUERPOIF:cuerpoif LLAV_C
+                {:
+                    RESULT=id + ":"+"\n" +
+                      "   " + cuerpoif;
+                :}
+;
+
+
+ELIFARG ::= OPERIFS:oper PAR_C LLAV_A CUERPOELIF:cuerpoelif LLAV_C 
+                        {:
+                RESULT=oper + ":"+"\n" +
+                       "   " + cuerpoelif;
+                        :}
+    | ID:id PAR_C LLAV_A CUERPOELIF:cuerpoelif LLAV_C
+                {:
+                    RESULT=id + ":"+"\n" + 
+                       "   " + cuerpoelif;
+                :}
+;
+
+OPERIFS ::= OP:op1 SIGNO:signo OP:op2
+            {:
+             RESULT= op1 + " " + signo + " " + op2;
+            :}
+;
+
+CUERPOIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA MOREPRINTS:print2
+                {:
+                    RESULT="print("+varprint+")\n"
+                                + print2;
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT="print("+varprint+")\n";
+                :}
+    | MOREIFS:ifstate 
+                {:
+                    RESULT=ifstate;
+                :}
+    | MORELIFS:elifstate
+                {:
+                    RESULT=elifstate;
+                :}
+;
+
+CUERPOELIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRINTS:print3
+                {:
+                    RESULT="print("+varprint+")\n"
+                                +  print3;
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT="print("+varprint+")\n";
+                :}
+    | MORELIFS:elifs 
+                {:
+                   RESULT=elifs;
+                :}
+
+;
+
+
+MOREIFS ::= MOREIFS:moreifs IF:ifpy PAR_A IFARG:arg 
+                {:
+                    RESULT= moreifs + "   " + ifpy + " " + arg;
+                :}
+    | IF:ifpy PAR_A IFARG:arg 
+                {:
+                    RESULT=  ifpy + " " + arg;
+                :}
+;
+
+MORELIFS ::= MORELIFS:morelifs ELSEIF PAR_A ELIFARG:elsearg  
+                {:
+                    RESULT=  morelifs + "elif" + " " + elsearg;
+                :}
+    | ELSEIF PAR_A ELIFARG:elsearg  
+                {:
+                    RESULT= "elif" + " " + elsearg;
+                :}
+;
+
+MOREPRINTS ::= MOREPRINTS:moreprints CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT= moreprints + "   " + "print("+varprint+")\n";
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT= "   " + "print("+varprint+")\n";
+                :}
 ;
 
 EXPRESION ::= ENTERO:nume
@@ -114,17 +246,29 @@ EXPRESION ::= ENTERO:nume
                 {:
                     RESULT=id;
                 :}
+    | COMILLA_S:cs1 ID:id COMILLA_S:cs2
+               {:
+                    RESULT=cs1 + id + cs2;
+                :}
+    | COMILLA_S:cs3 ENTERO:nume COMILLA_S:cs4
+               {:
+                    RESULT=cs3 + nume + cs4;
+                :}           
 ;
 
 
-OPERACION ::= OPERACION SIGNO:signo OP:op
+OPERACION ::= OP:op3 SIGNO:signo OP:op4 TERMINO:term
                 {:
-                    RESULT = " " + signo + " " + op +"\n";
+                  RESULT  = op3 + " " + signo + " " + op4 + " " + term +"\n";
                 :}
     | OP:op1 SIGNO:signo1 OP:op2
                 {:  
-                    RESULT = op1 + " " + signo1 + " " + op2 +"\n";
-                :}             
+                    RESULT = op1  + " " + signo1 + " " + op2 +"\n";
+                :}
+    | NOT OP:op5
+                {:  
+                    RESULT = "not" +  " "  + op5  +"\n";
+                :}
 ;
 
 
@@ -140,6 +284,15 @@ OP ::= ID:id
                 {:
                     RESULT=dble;
                 :}
+    | CADENA:cad
+                {:
+                    RESULT=cad;
+                :}
+    | DECIMAL:dec
+                {:
+                    RESULT=dec;
+                :}
+                
 ;
 
 
@@ -185,24 +338,42 @@ SIGNO ::= SUMA:sum
                 :}
     | AND:and
                 {:
-                    RESULT=and;
+                    RESULT="and";
                 :}
     | OR:or
                 {:
-                    RESULT=or;
-                :}
-    | NOT:not
-                {:
-                   RESULT=not;
+                    RESULT="or";
                 :}
 ;
 
-VARPRINT ::= CADENA:cad
+
+TERMINO ::= TERMINO:term SIGNO:signo OP:op
+                {:
+                    RESULT= term + " " + signo + "  " + op;
+                :}
+    | SIGNO:signo2 OP:op2
+                {:
+                    RESULT= signo2 + "  " + op2;
+                :}
+;
+
+
+
+VARPRINT ::= CADENA:cad SUMA:sum ID:id
+                {:
+                    RESULT=cad + ", " + id;
+                :}
+    | CADENA:cad
                 {:
                     RESULT=cad;
+                :}
+    | CADENA:cad SUMA:sum ENTERO:nume
+                {:
+                    RESULT=cad + ", " + nume;
                 :}
     | ID:id
                 {:
                     RESULT=id;
                 :}
 ;
+

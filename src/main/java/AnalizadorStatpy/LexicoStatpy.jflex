@@ -40,6 +40,8 @@ VOI = "void"
 CONSOLE = "console"
 WRITE = "write"
 MAIN = "main"
+IF = "if"
+ELSEIF = "else if"
 
 //operadores aritmeticos
 SUMA = "+"
@@ -61,11 +63,14 @@ AND = "&&"
 OR = "||"
 NOT = "!"
 
+//caracteres
+COMILLA_S = "'"
 
 //expresiones regulares
 
 ENTERO = [0-9]+
 DOUBLE = [0-9]+.[0-9]
+DECIMAL = [0-9]+.[0-9]+
 ID = [A-Za-zñÑ][_0-9A-Za-zñÑ]*
 blancos = [ \t\r\n\f]+
 comentario=("//".*\n)|("//".*\r)
@@ -100,6 +105,10 @@ comentario2=("/" "*"[^\*]* "*""/")
 <YYINITIAL> {NOT}      { return new Symbol(sym.NOT, yyline, yycolumn,yytext());}
 
 
+<YYINITIAL> {IF}      { return new Symbol(sym.IF, yyline, yycolumn,yytext());}
+<YYINITIAL> {ELSEIF}      { return new Symbol(sym.ELSEIF, yyline, yycolumn,yytext());}
+
+
 <YYINITIAL> {PAR_A}     {return new Symbol(sym.PAR_A, yyline, yycolumn,yytext());}
 <YYINITIAL> {PAR_C}     {return new Symbol(sym.PAR_C, yyline, yycolumn,yytext());}
 <YYINITIAL> {LLAV_A}    {return new Symbol(sym.LLAV_A, yyline, yycolumn,yytext());}
@@ -111,13 +120,16 @@ comentario2=("/" "*"[^\*]* "*""/")
 
 <YYINITIAL> {ENTERO}    { return new Symbol(sym.ENTERO, yyline, yycolumn,yytext());}
 <YYINITIAL> {DOUBLE}    { return new Symbol(sym.DOUBLE, yyline, yycolumn,yytext());}
+<YYINITIAL> {DECIMAL}    { return new Symbol(sym.DECIMAL, yyline, yycolumn,yytext());}
 <YYINITIAL> {ID}        {return new Symbol(sym.ID, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {COMILLA_S}    { return new Symbol(sym.COMILLA_S, yyline, yycolumn,yytext());}
 
 <YYINITIAL> [\"] { yybegin(CADENA) ; cadena+="\"";   }
 
 <YYINITIAL>{blancos} {}
-<YYINITIAL> {comentario} {System.out.println("Comentario: "+yytext()); }
-<YYINITIAL> {comentario2} {System.out.println("Comentario: "+yytext()); }
+<YYINITIAL> {comentario} { return new Symbol(sym.comentario, yyline, yycolumn,yytext());}
+<YYINITIAL> {comentario2} { return new Symbol(sym.comentario2, yyline, yycolumn,yytext());}
 
 <YYINITIAL> . {
         String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);
