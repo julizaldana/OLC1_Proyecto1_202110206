@@ -165,7 +165,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tw Cen MT Condensed Extra Bold" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="PROYECTO 1 - OLC1 "/>
+        <Property name="text" type="java.lang.String" value="PROYECTO 1 - OLC1 - 202110206"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

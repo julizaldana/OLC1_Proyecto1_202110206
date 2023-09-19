@@ -29,15 +29,16 @@ parser code {:
 
 :}
 
-terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,CONSOLE,WRITE,DOUBLE,DECIMAL,comentario,comentario2;
+terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,DOSP,CONSOLE,WRITE,DOUBLE,DECIMAL,comentario,comentario2;
 terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, DIST, AND, OR, NOT;
 terminal String COMILLA_S;
-terminal String IF, ELSEIF;
+terminal String IF, ELSEIF, SWITCH, CASE, BREAK, DEFAULT;
 terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
 nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT, TERMINO, VARPRINT2;
-nonterminal String IFSTATE, ELIFSTATE, IFARG, ELIFARG, OPERIFS, CUERPOIF, CUERPOELIF, MOREIFS, MORELIFS, MOREPRINTS;
+nonterminal String SWITCHSTATE,SWITCHIF,CASE1,SWITCHIF2,CASE2,SWITCHIF3,CASED;
+nonterminal String IFSTATE, ELIFSTATE, IFARG, ELIFARG, OPERIFS, SUPERNOT, CUERPOIF, CUERPOELIF, MASIFS, MOREIFS, IFARGIF, IFCUERPOIF, IFSANIDADOS, MORELIFS, IFARGELIF, IFCUERPOELIF, MOREPRINTS;
 nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, L;
 
 start with INICIO;
@@ -80,9 +81,13 @@ L ::= TIPO:tip ID:id
                     tmp+=tip+" "+id;
                 :}
 ;
+
+/* CUERPO DEL MAIN */
+
 CUERPO ::= CUERPO C
     | C
 ;
+
 C ::= TIPO:tip ID:id PYCOMA
 
     | TIPO:tip ID:id ASIGNA EXPRESION:exp PYCOMA
@@ -101,9 +106,10 @@ C ::= TIPO:tip ID:id PYCOMA
                 :}
     | IFSTATE 
     | ELIFSTATE 
+    | SWITCHSTATE
     | comentario:com
                 {:
-                    tmp+=com+"\n";
+                    tmp+=com;
                 :}
     | comentario2:com2
                 {:
@@ -124,6 +130,8 @@ TIPO ::= INT1
 
 ;
 
+
+/* SENTENCIAS IF - ELSE IF */
 
 IFSTATE ::= IF:ifpy PAR_A IFARG:arg 
                 {:
@@ -162,9 +170,40 @@ ELIFARG ::= OPERIFS:oper PAR_C LLAV_A CUERPOELIF:cuerpoelif LLAV_C
                 :}
 ;
 
-OPERIFS ::= OP:op1 SIGNO:signo OP:op2
+OPERIFS ::= OP:op4 SIGNO:signo2 OP:op5 TERMINO:term
+            {:
+             RESULT= op4 + " " + signo2 + " " + op5 + " " +term;
+            :}
+    | OP:op1 SIGNO:signo OP:op2
             {:
              RESULT= op1 + " " + signo + " " + op2;
+            :}
+    | NOT OP:op3
+            {:
+             RESULT=  " " + "not" + " " + op3;
+            :}
+    | NOT OP:op4 TERMINO:term
+            {:
+             RESULT=  " " + "not" + " " + op4 + " " + term;
+            :}
+    | SUPERNOT:supernot NOT OP:op5        
+            {:
+             RESULT=  supernot + " " + "not" + " " + op5;
+            :}
+    | SUPERNOT:supernot NOT OP:op6 TERMINO:term
+            {:
+             RESULT=  supernot + " " + "not" + " " + op6 + " " + term;
+            :}
+;
+
+
+SUPERNOT ::= SUPERNOT:supernot NOT
+            {:
+             RESULT= supernot + " " + "not";
+            :}
+    | NOT
+            {:
+             RESULT= " " + "not";
             :}
 ;
 
@@ -177,13 +216,13 @@ CUERPOIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA MOREPRINTS
                 {:
                     RESULT="print("+varprint+")\n";
                 :}
+    | MOREIFS:ifstate1 MORELIFS:elif
+                {:
+                    RESULT=ifstate1 + "   " + elif;
+                :}
     | MOREIFS:ifstate 
                 {:
                     RESULT=ifstate;
-                :}
-    | MORELIFS:elifstate
-                {:
-                    RESULT=elifstate;
                 :}
 ;
 
@@ -195,6 +234,10 @@ CUERPOELIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRI
     | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
                 {:
                     RESULT="print("+varprint+")\n";
+                :}  
+    | MOREIFS:ifs MORELIFS:elifs
+                {:
+                    RESULT= "      " + ifs + "   " + elifs;
                 :}
     | MORELIFS:elifs 
                 {:
@@ -204,25 +247,71 @@ CUERPOELIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRI
 ;
 
 
-MOREIFS ::= MOREIFS:moreifs IF:ifpy PAR_A IFARG:arg 
+MOREIFS ::= MOREIFS:moreifs IF:ifpy PAR_A IFARGIF:ifarg 
                 {:
-                    RESULT= moreifs + "   " + ifpy + " " + arg;
+                    RESULT= moreifs + "   " + ifpy + " " + ifarg;
                 :}
-    | IF:ifpy PAR_A IFARG:arg 
+    | IF:ifpy PAR_A IFARGIF:ifarg 
                 {:
-                    RESULT=  ifpy + " " + arg;
+                    RESULT=  ifpy + " " + ifarg;
+                :}
+    
+;
+
+
+IFARGIF ::= OPERIFS:oper PAR_C LLAV_A IFCUERPOIF:ifcuerpoif LLAV_C 
+                        {:
+                RESULT=oper + ":"+"\n" +
+                     "   " + ifcuerpoif;
+                        :}
+    | ID:id PAR_C LLAV_A IFCUERPOIF:ifcuerpoif LLAV_C
+                {:
+                    RESULT=id + ":"+"\n" +
+                      "    " + ifcuerpoif;
+                :}             
+
+;
+
+IFCUERPOIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRINTS:print3
+                {:
+                    RESULT= "   " + "print("+varprint+")\n"
+                                +  print3;
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT= "      " + "print("+varprint+")\n";
+                :}
+    | MOREIFS:moreifs 
+                {:
+                    RESULT= "   " + moreifs;
                 :}
 ;
 
-MORELIFS ::= MORELIFS:morelifs ELSEIF PAR_A ELIFARG:elsearg  
+
+
+MORELIFS ::= MORELIFS:morelifs ELSEIF PAR_A IFARGELIF:elsearg  
                 {:
                     RESULT=  morelifs + "elif" + " " + elsearg;
                 :}
-    | ELSEIF PAR_A ELIFARG:elsearg  
+    | ELSEIF PAR_A IFARGELIF:elsearg  
                 {:
                     RESULT= "elif" + " " + elsearg;
                 :}
 ;
+
+IFARGELIF ::= OPERIFS:oper PAR_C LLAV_A CUERPOELIF:cuerpoelif LLAV_C
+                        {:
+                RESULT=oper + ":"+"\n" +
+                       "      " + cuerpoelif;
+                        :}
+    | ID:id PAR_C LLAV_A CUERPOELIF:cuerpoelif LLAV_C
+                {:
+                    RESULT=id + ":"+"\n" + 
+                       "      " + cuerpoelif;
+                :}
+;
+
+
 
 MOREPRINTS ::= MOREPRINTS:moreprints CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
                 {:
@@ -233,6 +322,8 @@ MOREPRINTS ::= MOREPRINTS:moreprints CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint
                     RESULT= "   " + "print("+varprint+")\n";
                 :}
 ;
+
+/* DECLARACIÓN Y ASIGNACION DE VARIABLES */
 
 EXPRESION ::= ENTERO:nume
                 {:
@@ -256,6 +347,7 @@ EXPRESION ::= ENTERO:nume
                 :}           
 ;
 
+/* OPERACIONES ARITMETICAS, LOGICAS, RELACIONALES  */
 
 OPERACION ::= OP:op3 SIGNO:signo OP:op4 TERMINO:term
                 {:
@@ -291,7 +383,7 @@ OP ::= ID:id
     | DECIMAL:dec
                 {:
                     RESULT=dec;
-                :}
+                :}           
                 
 ;
 
@@ -344,20 +436,33 @@ SIGNO ::= SUMA:sum
                 {:
                     RESULT="or";
                 :}
+    | NOT
+                 {:
+                    RESULT="not";
+                :}
 ;
 
+/* OPERACIONES RECURSIVAS */
 
 TERMINO ::= TERMINO:term SIGNO:signo OP:op
                 {:
                     RESULT= term + " " + signo + "  " + op;
                 :}
+    | TERMINO:term SIGNO:signo SUPERNOT:not1 OP:op1
+                {:
+                    RESULT= term + " " + signo + "  " + not1 + "  " + op1;
+                :}
     | SIGNO:signo2 OP:op2
                 {:
                     RESULT= signo2 + "  " + op2;
                 :}
+    | SIGNO:signo3 SUPERNOT:not OP:op3
+                {:
+                    RESULT= signo3 + "  " + not + "  " + op3;
+                :}
 ;
 
-
+/* PARA CONSOLE.WRITE(); */
 
 VARPRINT ::= CADENA:cad SUMA:sum ID:id
                 {:
@@ -377,3 +482,118 @@ VARPRINT ::= CADENA:cad SUMA:sum ID:id
                 :}
 ;
 
+/* PARA SWITCH */
+
+SWITCHSTATE ::= SWITCH:swit PAR_A ID:id PAR_C LLAV_A CASE:case1 ENTERO:enu1 DOSP ID:id2 ASIGNA ENTERO:enu2 PYCOMA SWITCHIF:switchif 
+                {:
+                  tmp += "def " + swit + "(" + case1 + " , " + id2 + ")" + "\n" 
+                                                        + "    " + "switcher" + " = {" + "\n" 
+                                                        + "      " + enu1 + ": " + id2 + " = " + enu2 + "\n" +  switchif + "\n"; 
+                :}
+    |SWITCH:swit PAR_A ID:id PAR_C LLAV_A CASE:case1 ENTERO:enu1 DOSP ID:id2 ASIGNA ENTERO:enu2 PYCOMA CASE1:caso
+                {:
+                  tmp += "def " + swit + "(" + case1 + " , " + id2 + ")" + "\n" 
+                                                        + "    " + "switcher" + " = {" + "\n" 
+                                                        + "      " + enu1 + ": " + id2 + " = " + enu2 + "," + "\n"  
+                                                        + caso; 
+                :}
+
+;
+
+SWITCHIF ::= MOREIFS:ifstate1 MORELIFS:elif CASE1:case1
+                {:
+                    RESULT = "        " + ifstate1 + "        " + elif + "," + case1;
+                :}
+;
+
+
+CASE1 ::= BREAK PYCOMA CASE ENTERO:enu2 DOSP ID:id3 ASIGNA ENTERO:enu3 PYCOMA SWITCHIF2:switchif
+                {:
+                  RESULT = "      " + enu2 + ": " + id3 + " = " + enu3 + "," + "\n" + switchif; 
+                :}
+    | BREAK PYCOMA CASE ENTERO:enu2 DOSP ID:id3 ASIGNA ENTERO:enu3 PYCOMA CASE2:case2
+                {:
+                  RESULT = "      " + enu2 + ": " + id3 + " = " + enu3 + "," + "\n" + case2; 
+                :}
+;
+
+
+SWITCHIF2 ::= MOREIFS:ifstate2 MORELIFS:elif CASE2:case2
+                {:
+                    RESULT = "        " + ifstate2 + "        " + elif + "," + case2;
+                :}
+;
+
+
+CASE2 ::= CASE ENTERO:enu3 DOSP ID:id4 ASIGNA ENTERO:enu4 PYCOMA SWITCHIF3:switchif LLAV_C
+                {:
+                  RESULT = "      " + enu3 + ": " + id4 + " = " + enu4 + "," + "\n" + switchif + 
+                                                  "     " + "}\n"; 
+                :}  
+;
+
+
+SWITCHIF3 ::= MOREIFS:ifstate3 MORELIFS:elif CASED:cased 
+            {:
+                RESULT = "        " + ifstate3 + "        " + elif + "," + cased;
+            :}
+    | CASED:cased
+            {: 
+                RESULT = cased;
+            :}
+;
+
+
+CASED ::= DEFAULT DOSP CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  
+                {:
+                    RESULT= "      " + "4: " + "print("+varprint+"),\n";
+                                
+                :}
+;
+
+/* PARA CICLO FOR */
+
+
+
+
+
+
+
+
+/* PARA CICLO WHILE */
+
+
+
+
+
+
+
+
+
+
+/* PARA CICLO DOWHILE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* VARIABLES GLOBALES */
+
+
+
+
+
+
+
+
+
+
+/* FUNCIONES ESTADÍSTICAS */

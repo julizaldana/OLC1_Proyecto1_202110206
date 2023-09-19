@@ -9,49 +9,54 @@ package AnalizadorStatpy;
 public class sym {
   /* terminals */
   public static final int INT1 = 5;
-  public static final int MULT = 23;
-  public static final int comentario2 = 20;
+  public static final int MULT = 24;
+  public static final int comentario2 = 21;
   public static final int ENTERO = 3;
-  public static final int DOUBLE = 17;
-  public static final int RESTA = 22;
+  public static final int CASE = 39;
+  public static final int DOUBLE = 18;
+  public static final int RESTA = 23;
   public static final int PRI = 11;
-  public static final int WRITE = 16;
+  public static final int WRITE = 17;
   public static final int PUB = 10;
-  public static final int NOT = 33;
-  public static final int AND = 31;
-  public static final int ELSEIF = 36;
-  public static final int IGUAL = 29;
-  public static final int OR = 32;
+  public static final int NOT = 34;
+  public static final int AND = 32;
+  public static final int ELSEIF = 37;
+  public static final int IGUAL = 30;
+  public static final int OR = 33;
   public static final int STRING1 = 9;
-  public static final int DIV = 24;
-  public static final int ASIGNA = 43;
+  public static final int DIV = 25;
+  public static final int ASIGNA = 48;
   public static final int CHAR1 = 6;
-  public static final int SUMA = 21;
-  public static final int IF = 35;
+  public static final int SUMA = 22;
+  public static final int IF = 36;
   public static final int MAIN = 13;
-  public static final int LLAV_C = 40;
+  public static final int LLAV_C = 45;
   public static final int ID = 2;
-  public static final int LLAV_A = 39;
-  public static final int PYCOMA = 42;
-  public static final int DIST = 30;
+  public static final int LLAV_A = 44;
+  public static final int PYCOMA = 47;
+  public static final int DIST = 31;
   public static final int VOI = 12;
   public static final int EOF = 0;
-  public static final int DECIMAL = 18;
+  public static final int DECIMAL = 19;
   public static final int error = 1;
-  public static final int MAYOR_I = 27;
-  public static final int COMA = 41;
+  public static final int MAYOR_I = 28;
+  public static final int COMA = 46;
   public static final int CADENA = 4;
-  public static final int MENOR = 26;
-  public static final int PAR_C = 38;
-  public static final int COMILLA_S = 34;
-  public static final int PAR_A = 37;
-  public static final int MENOR_I = 28;
-  public static final int MAYOR = 25;
+  public static final int MENOR = 27;
+  public static final int PAR_C = 43;
+  public static final int COMILLA_S = 35;
+  public static final int PAR_A = 42;
+  public static final int BREAK = 40;
+  public static final int MENOR_I = 29;
+  public static final int SWITCH = 38;
+  public static final int MAYOR = 26;
   public static final int PUNTO = 14;
-  public static final int comentario = 19;
+  public static final int DEFAULT = 41;
+  public static final int DOSP = 15;
+  public static final int comentario = 20;
   public static final int BOOL1 = 8;
   public static final int DOUBLE1 = 7;
-  public static final int CONSOLE = 15;
+  public static final int CONSOLE = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -68,6 +73,7 @@ public class sym {
   "VOI",
   "MAIN",
   "PUNTO",
+  "DOSP",
   "CONSOLE",
   "WRITE",
   "DOUBLE",
@@ -90,6 +96,10 @@ public class sym {
   "COMILLA_S",
   "IF",
   "ELSEIF",
+  "SWITCH",
+  "CASE",
+  "BREAK",
+  "DEFAULT",
   "PAR_A",
   "PAR_C",
   "LLAV_A",

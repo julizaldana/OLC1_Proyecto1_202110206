@@ -37,7 +37,7 @@ public class Maininterface extends javax.swing.JFrame {
         initComponents();
         
         //Titulo
-        this.setTitle("Proyecto 1 - OLC1");
+        this.setTitle("Proyecto 1 - OLC1 - 202110206");
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         
         //CardLayout
@@ -118,7 +118,7 @@ public class Maininterface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 24)); // NOI18N
-        jLabel4.setText("PROYECTO 1 - OLC1 ");
+        jLabel4.setText("PROYECTO 1 - OLC1 - 202110206");
 
         jPanel1.setLayout(new java.awt.CardLayout());
 

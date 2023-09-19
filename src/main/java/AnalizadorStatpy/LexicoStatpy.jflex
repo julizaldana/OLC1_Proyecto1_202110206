@@ -28,6 +28,7 @@ COMA = ","
 PYCOMA = ";"
 ASIGNA = "="
 PUNTO = "."
+DOSP = ":"
 
 //palabras reservadas
 
@@ -42,6 +43,11 @@ WRITE = "write"
 MAIN = "main"
 IF = "if"
 ELSEIF = "else if"
+SWITCH = "switch"
+CASE = "case"
+BREAK = "break"
+DEFAULT = "default" 
+
 
 //operadores aritmeticos
 SUMA = "+"
@@ -107,7 +113,10 @@ comentario2=("/" "*"[^\*]* "*""/")
 
 <YYINITIAL> {IF}      { return new Symbol(sym.IF, yyline, yycolumn,yytext());}
 <YYINITIAL> {ELSEIF}      { return new Symbol(sym.ELSEIF, yyline, yycolumn,yytext());}
-
+<YYINITIAL> {SWITCH}      { return new Symbol(sym.SWITCH, yyline, yycolumn,yytext());}
+<YYINITIAL> {CASE}      { return new Symbol(sym.CASE, yyline, yycolumn,yytext());}
+<YYINITIAL> {BREAK}      { return new Symbol(sym.BREAK, yyline, yycolumn,yytext());}
+<YYINITIAL> {DEFAULT}      { return new Symbol(sym.DEFAULT, yyline, yycolumn,yytext());}
 
 <YYINITIAL> {PAR_A}     {return new Symbol(sym.PAR_A, yyline, yycolumn,yytext());}
 <YYINITIAL> {PAR_C}     {return new Symbol(sym.PAR_C, yyline, yycolumn,yytext());}
@@ -117,6 +126,7 @@ comentario2=("/" "*"[^\*]* "*""/")
 <YYINITIAL> {PYCOMA}    {return new Symbol(sym.PYCOMA, yyline, yycolumn,yytext());}
 <YYINITIAL> {ASIGNA}    {return new Symbol(sym.ASIGNA, yyline, yycolumn,yytext());}
 <YYINITIAL> {PUNTO}    {return new Symbol(sym.PUNTO, yyline, yycolumn,yytext());}
+<YYINITIAL> {DOSP}    {return new Symbol(sym.DOSP, yyline, yycolumn,yytext());}
 
 <YYINITIAL> {ENTERO}    { return new Symbol(sym.ENTERO, yyline, yycolumn,yytext());}
 <YYINITIAL> {DOUBLE}    { return new Symbol(sym.DOUBLE, yyline, yycolumn,yytext());}
