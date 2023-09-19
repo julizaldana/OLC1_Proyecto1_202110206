@@ -16,6 +16,7 @@ public class sym {
   public static final int DOUBLE = 18;
   public static final int RESTA = 23;
   public static final int PRI = 11;
+  public static final int FOR = 42;
   public static final int WRITE = 17;
   public static final int PUB = 10;
   public static final int NOT = 34;
@@ -25,32 +26,33 @@ public class sym {
   public static final int OR = 33;
   public static final int STRING1 = 9;
   public static final int DIV = 25;
-  public static final int ASIGNA = 48;
+  public static final int ASIGNA = 50;
   public static final int CHAR1 = 6;
   public static final int SUMA = 22;
   public static final int IF = 36;
   public static final int MAIN = 13;
-  public static final int LLAV_C = 45;
+  public static final int LLAV_C = 47;
   public static final int ID = 2;
-  public static final int LLAV_A = 44;
-  public static final int PYCOMA = 47;
+  public static final int LLAV_A = 46;
+  public static final int PYCOMA = 49;
   public static final int DIST = 31;
   public static final int VOI = 12;
   public static final int EOF = 0;
   public static final int DECIMAL = 19;
   public static final int error = 1;
   public static final int MAYOR_I = 28;
-  public static final int COMA = 46;
+  public static final int COMA = 48;
   public static final int CADENA = 4;
   public static final int MENOR = 27;
-  public static final int PAR_C = 43;
+  public static final int PAR_C = 45;
   public static final int COMILLA_S = 35;
-  public static final int PAR_A = 42;
+  public static final int PAR_A = 44;
   public static final int BREAK = 40;
   public static final int MENOR_I = 29;
   public static final int SWITCH = 38;
   public static final int MAYOR = 26;
   public static final int PUNTO = 14;
+  public static final int WHILE = 43;
   public static final int DEFAULT = 41;
   public static final int DOSP = 15;
   public static final int comentario = 20;
@@ -100,6 +102,8 @@ public class sym {
   "CASE",
   "BREAK",
   "DEFAULT",
+  "FOR",
+  "WHILE",
   "PAR_A",
   "PAR_C",
   "LLAV_A",

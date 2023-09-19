@@ -47,6 +47,8 @@ SWITCH = "switch"
 CASE = "case"
 BREAK = "break"
 DEFAULT = "default" 
+FOR = "for"
+WHILE = "while"
 
 
 //operadores aritmeticos
@@ -117,6 +119,9 @@ comentario2=("/" "*"[^\*]* "*""/")
 <YYINITIAL> {CASE}      { return new Symbol(sym.CASE, yyline, yycolumn,yytext());}
 <YYINITIAL> {BREAK}      { return new Symbol(sym.BREAK, yyline, yycolumn,yytext());}
 <YYINITIAL> {DEFAULT}      { return new Symbol(sym.DEFAULT, yyline, yycolumn,yytext());}
+<YYINITIAL> {FOR}      { return new Symbol(sym.FOR, yyline, yycolumn,yytext());}
+<YYINITIAL> {WHILE}      { return new Symbol(sym.WHILE, yyline, yycolumn,yytext());}
+
 
 <YYINITIAL> {PAR_A}     {return new Symbol(sym.PAR_A, yyline, yycolumn,yytext());}
 <YYINITIAL> {PAR_C}     {return new Symbol(sym.PAR_C, yyline, yycolumn,yytext());}
