@@ -32,15 +32,16 @@ parser code {:
 terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,DOSP,CONSOLE,WRITE,DOUBLE,DECIMAL,comentario,comentario2;
 terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, DIST, AND, OR, NOT;
 terminal String COMILLA_S;
-terminal String IF, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, FOR, WHILE;
+terminal String IF, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, FOR, WHILE, DO;
 terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
-nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT, TERMINO, VARPRINT2;
+nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT, TERMINO, COMENTARIOS;
 nonterminal String SWITCHSTATE,SWITCHIF,CASE1,SWITCHIF2,CASE2,SWITCHIF3,CASED;
 nonterminal String IFSTATE, ELIFSTATE, IFARG, ELIFARG, OPERIFS, SUPERNOT, CUERPOIF, CUERPOELIF, MASIFS, MOREIFS, IFARGIF, IFCUERPOIF, IFSANIDADOS, MORELIFS, IFARGELIF, IFCUERPOELIF, MOREPRINTS;
 nonterminal String FORSTATE, OPERFOR, CUERPOFOR, MOREFORS;
 nonterminal String WHILESTATE, CUERPOWHILE, WHILESTATEIF;
+nonterminal String DOWHILESTATE,CUERPODOWHILE, OPERADOR,DOWHILEIF,WHILEDOWHILE;
 nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, L;
 
 start with INICIO;
@@ -72,10 +73,24 @@ S ::= VOI:vi MAIN:mai PAR_A   {:
                 {:
                     tmp+=")"+":\n";
                 :}
-                CUERPO LLAV_C
+                CUERPO LLAV_C COMENTARIOS:com2
                 {:
-                    tmp+="if__name__ = “__main__”:\n" + " " + mai + "()";
+                    tmp+="if__name__ = “__main__”:\n" + " " + mai + "()" + "\n" + com2;
+                :}            
+;
+
+COMENTARIOS ::= comentario:com
+                {:
+                    RESULT=com;
                 :}
+    | comentario2:com2
+                {:
+                    RESULT=com2;
+                :}
+    |         
+               {:
+                    RESULT="";
+              :}
 ;
 
 L ::= TIPO:tip ID:id
@@ -109,7 +124,7 @@ C ::= TIPO:tip ID:id PYCOMA
     | IFSTATE 
     | ELIFSTATE 
     | SWITCHSTATE
-    | FORSTATE
+    | FORSTATE  DOWHILESTATE
     | WHILESTATE
     | comentario:com
                 {:
@@ -238,7 +253,7 @@ CUERPOELIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRI
     | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
                 {:
                     RESULT="print("+varprint+")\n";
-                :}  
+                :}           
     | MOREIFS:ifs MORELIFS:elifs
                 {:
                     RESULT= "      " + ifs + "   " + elifs;
@@ -247,6 +262,10 @@ CUERPOELIF ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA  MOREPRI
                 {:
                    RESULT=elifs;
                 :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA INT1 ID PYCOMA WHILEDOWHILE:whiledowhile
+                {:
+                    RESULT="print("+varprint+")\n"  + whiledowhile;
+                :}  
 
 ;
 
@@ -615,13 +634,20 @@ OPERFOR ::= OP:op1 SIGNO:signo OP:op2
 WHILESTATE ::= WHILE:whiles PAR_A OPERIFS:operifs PAR_C LLAV_A CUERPOWHILE:cuerpowhile ID:id1 ASIGNA ID:id2 SUMA ENTERO:nume PYCOMA LLAV_C
             {:
              tmp += whiles + " " + operifs + ":" + "\n" + 
-                                "         " + cuerpowhile + 
+                                "      " + cuerpowhile + 
                                 "         " + id1 + " = " + id2 + " + " + nume + "\n";
             :}
     | WHILE:whiles PAR_A OPERIFS:operifs PAR_C LLAV_A CUERPOWHILE:cuerpowhile PYCOMA LLAV_C
             {:
              tmp += whiles + " " + operifs + ":" + "\n" + 
-                                "         " + cuerpowhile;
+                                "      " + cuerpowhile;
+            :}
+;
+
+WHILEDOWHILE ::= WHILE:whiles PAR_A OPERIFS:operifs PAR_C LLAV_A CUERPOWHILE:cuerpowhile LLAV_C
+            {:
+             RESULT = "            " + whiles + " " + operifs + ":" + "\n" + 
+                                "           " + cuerpowhile;
             :}
 ;
 
@@ -664,12 +690,45 @@ WHILESTATEIF ::= WHILE:whiles PAR_A OPERIFS:operifs PAR_C LLAV_A CUERPOWHILE:cue
 
 
 
+DOWHILESTATE ::= INT1 ID:id ASIGNA ENTERO:nume PYCOMA DO LLAV_A CUERPODOWHILE:cuerpodowhile OPERADOR:opr LLAV_C WHILE PAR_A OPERIFS:operifs PAR_C PYCOMA
+            {:
+             tmp += "          i = " + nume + "\n" 
+                               + "          " + "while True:" +   "\n"  +
+                                "              " + cuerpodowhile + 
+                                "              " +    opr  + 
+                                "              " + "if (" + operifs + "):" +   "\n" +  
+                                "                         " + "break" + "\n";
+                                
+            :}
+;
+
+OPERADOR ::= ID:id1 ASIGNA ID:id2 SUMA ENTERO:nume PYCOMA
+                {:
+                    RESULT = id1 + " = " + id2 + " + " + nume + "\n";
+                :}
+;
 
 
+CUERPODOWHILE ::= CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA MOREPRINTS:print2
+                {:
+                    RESULT="print("+varprint+")\n"
+                                + print2;
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA
+                {:
+                    RESULT="print("+varprint+")\n";
+                :}
+    | CONSOLE PUNTO WRITE PAR_A VARPRINT:varprint PAR_C PYCOMA DOWHILEIF:dowhileif
+                {:
+                    RESULT="print("+varprint+")\n" + dowhileif;
+                :}
+;
 
-
-
-
+DOWHILEIF ::= MOREIFS:ifstate1 MORELIFS:elif 
+                {:
+                    RESULT = "        " + ifstate1 + "        " + elif;
+                :}
+;
 
 
 

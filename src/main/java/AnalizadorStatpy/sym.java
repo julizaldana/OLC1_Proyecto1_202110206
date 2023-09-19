@@ -26,27 +26,27 @@ public class sym {
   public static final int OR = 33;
   public static final int STRING1 = 9;
   public static final int DIV = 25;
-  public static final int ASIGNA = 50;
+  public static final int ASIGNA = 51;
   public static final int CHAR1 = 6;
   public static final int SUMA = 22;
   public static final int IF = 36;
   public static final int MAIN = 13;
-  public static final int LLAV_C = 47;
+  public static final int LLAV_C = 48;
   public static final int ID = 2;
-  public static final int LLAV_A = 46;
-  public static final int PYCOMA = 49;
+  public static final int LLAV_A = 47;
+  public static final int PYCOMA = 50;
   public static final int DIST = 31;
   public static final int VOI = 12;
   public static final int EOF = 0;
   public static final int DECIMAL = 19;
   public static final int error = 1;
   public static final int MAYOR_I = 28;
-  public static final int COMA = 48;
+  public static final int COMA = 49;
   public static final int CADENA = 4;
   public static final int MENOR = 27;
-  public static final int PAR_C = 45;
+  public static final int PAR_C = 46;
   public static final int COMILLA_S = 35;
-  public static final int PAR_A = 44;
+  public static final int PAR_A = 45;
   public static final int BREAK = 40;
   public static final int MENOR_I = 29;
   public static final int SWITCH = 38;
@@ -58,6 +58,7 @@ public class sym {
   public static final int comentario = 20;
   public static final int BOOL1 = 8;
   public static final int DOUBLE1 = 7;
+  public static final int DO = 44;
   public static final int CONSOLE = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -104,6 +105,7 @@ public class sym {
   "DEFAULT",
   "FOR",
   "WHILE",
+  "DO",
   "PAR_A",
   "PAR_C",
   "LLAV_A",

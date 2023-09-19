@@ -13,7 +13,6 @@ parser code {:
 
         //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
         public List<String> resultados = new ArrayList<String>();
-
 :}
 
 

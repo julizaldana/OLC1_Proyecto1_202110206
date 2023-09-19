@@ -49,6 +49,7 @@ BREAK = "break"
 DEFAULT = "default" 
 FOR = "for"
 WHILE = "while"
+DO = "do"
 
 
 //operadores aritmeticos
@@ -121,6 +122,7 @@ comentario2=("/" "*"[^\*]* "*""/")
 <YYINITIAL> {DEFAULT}      { return new Symbol(sym.DEFAULT, yyline, yycolumn,yytext());}
 <YYINITIAL> {FOR}      { return new Symbol(sym.FOR, yyline, yycolumn,yytext());}
 <YYINITIAL> {WHILE}      { return new Symbol(sym.WHILE, yyline, yycolumn,yytext());}
+<YYINITIAL> {DO}      { return new Symbol(sym.DO, yyline, yycolumn,yytext());}
 
 
 <YYINITIAL> {PAR_A}     {return new Symbol(sym.PAR_A, yyline, yycolumn,yytext());}
