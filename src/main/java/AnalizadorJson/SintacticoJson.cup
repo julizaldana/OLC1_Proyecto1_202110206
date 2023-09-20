@@ -1,17 +1,34 @@
 package AnalizadorJson;
 import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import ReportesHtml.ReporteError;
+import ReportesHtml.ReporteToken;
+
 
 parser code {:
     public void syntax_error(Symbol s){
+        String lexema = (String) s.value;
+        String descripcion = "Error sintáctico";
+        int linea = s.left + 1;
+        int columna = s.right + 1;
+
+        // crear objeto de reporte error
+        ReporteError error = new ReporteError(lexema, descripcion, linea, columna);
+
+        // se añade error a la lista de errores
+        ReporteError.errorList.add(error);
+
         System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
         System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
+
     String tmp="";
 
-        //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
+        // Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
         public List<String> resultados = new ArrayList<String>();
 :}
 

@@ -19,7 +19,14 @@ import AnalizadorJson.SintacticoJson;
 import AnalizadorJson.LexicoJson;
 import AnalizadorStatpy.LexicoStatpy;
 import AnalizadorStatpy.SintacticoStatpy;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import ReportesHtml.ReporteError;
+import ReportesHtml.ReporteToken;
+import javax.swing.JOptionPane;
+import ReportesHtml.ReporteErrorSp;
+import ReportesHtml.ReporteTokenSp;
 
 
 /**
@@ -74,6 +81,8 @@ public class Maininterface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -84,6 +93,8 @@ public class Maininterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -92,9 +103,6 @@ public class Maininterface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 18)); // NOI18N
@@ -142,6 +150,20 @@ public class Maininterface extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Reporte Tokens");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Reporte Errores");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,9 +180,13 @@ public class Maininterface extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(143, 143, 143))
         );
         jPanel2Layout.setVerticalGroup(
@@ -168,7 +194,12 @@ public class Maininterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,6 +237,20 @@ public class Maininterface extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setText("Reporte Tokens");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("Reporte Errores");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -224,9 +269,12 @@ public class Maininterface extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,6 +296,10 @@ public class Maininterface extends javax.swing.JFrame {
                         .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
         );
@@ -304,23 +356,13 @@ public class Maininterface extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Reportes");
-
-        jMenuItem4.setText("Reporte Tokens");
-        jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Reporte de Errores Léxicos");
-        jMenu2.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1113, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,6 +537,233 @@ public class Maininterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // BOTÓN PARA GENERAR REPORTE HTML DE ERRORES - JSON:
+    
+
+        // Se verifica si hay errores dentro del la lista de errores
+        if (ReporteError.errorList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay errores para reportar.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            // Se crea un File Writer, para poder crear el archivo html de errores
+            FileWriter htmlFileWriter = new FileWriter("REPORTE_ERRORES_JSON_202110206.HTML");
+
+            // Se crea un Buffered Writer
+            BufferedWriter writer = new BufferedWriter(htmlFileWriter);
+
+            // Header de un HTML
+            writer.write("<html>");
+            writer.write("<head><title>Errores JSON - 202110206</title></head>");
+            writer.write("<body>");
+            writer.write("<center>");
+            writer.write("<h1>Reporte de Errores - JSON</h1>");
+
+            // Se crea tabla
+            writer.write("<table border='1'>");
+            writer.write("<tr bgcolor=orange><th>Lexema</th><th>Descripción</th><th>Línea</th><th>Columna</th></tr>");
+
+            // Se obtienen los atributos y se itera para obtenerlos en la tabla
+            for (ReporteError error : ReporteError.errorList) {
+                writer.write("<tr>");
+                writer.write("<td>" + error.getLexema() + "</td>");
+                writer.write("<td>" + error.getDescripcion() + "</td>");
+                writer.write("<td>" + error.getLinea() + "</td>");
+                writer.write("<td>" + error.getColumna() + "</td>");
+                writer.write("</tr>");
+            }
+
+            // Se cierra el HTML
+            writer.write("</table>");
+            writer.write("</center>");
+            writer.write("</body>");
+            writer.write("</html>");
+
+            //Se cierra el writer
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, "Reporte de errores generado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte de errores.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+             
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // BOTÓN PARA GENERAR REPORTE HTML DE TOKENS - JSON:
+    
+        // Se verifica si hay errores dentro del la lista de errores
+        if (ReporteToken.tokenList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay tokens para reportar.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            // Se crea un File Writer, para poder crear el archivo html de errores
+            FileWriter htmlFileWriter = new FileWriter("REPORTE_TOKENS_JSON_202110206.HTML");
+
+            // Se crea un Buffered Writer
+            BufferedWriter writer = new BufferedWriter(htmlFileWriter);
+
+            // Header de un HTML
+            writer.write("<html>");
+            writer.write("<head><title>Tokens JSON - 202110206</title></head>");
+            writer.write("<body>");
+            writer.write("<center>");
+            writer.write("<h1>Reporte de Tokens - JSON</h1>");
+
+            // Se crea tabla
+            writer.write("<table border='1'>");
+            writer.write("<tr bgcolor=orange><th>Lexema</th><th>Token</th><th>Línea</th><th>Columna</th></tr>");
+
+            // Se obtienen los atributos y se itera para obtenerlos en la tabla
+            for (ReporteToken token : ReporteToken.tokenList) {
+                writer.write("<tr>");
+                writer.write("<td>" + token.getLexema() + "</td>");
+                writer.write("<td>" + token.getToken() + "</td>");
+                writer.write("<td>" + token.getLinea() + "</td>");
+                writer.write("<td>" + token.getColumna() + "</td>");
+                writer.write("</tr>");
+            }
+
+            // Se cierra el HTML
+            writer.write("</table>");
+            writer.write("</center>");
+            writer.write("</body>");
+            writer.write("</html>");
+
+            //Se cierra el writer
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, "Reporte de tokens generado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte de tokens.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+             
+        
+        
+
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // BOTÓN PARA GENERAR REPORTE DE ERRORES HTML - STATPY 
+
+        // Se verifica si hay errores dentro del la lista de errores
+        if (ReporteErrorSp.errorListSP.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay errores para reportar.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            // Se crea un File Writer, para poder crear el archivo html de errores
+            FileWriter htmlFileWriter = new FileWriter("REPORTE_ERRORES_STATPY_202110206.HTML");
+
+            // Se crea un Buffered Writer
+            BufferedWriter writer = new BufferedWriter(htmlFileWriter);
+
+            // Header de un HTML
+            writer.write("<html>");
+            writer.write("<head><title>Errores StatPy - 202110206</title></head>");
+            writer.write("<body>");
+            writer.write("<center>");
+            writer.write("<h1>Reporte de Errores - StatPy</h1>");
+
+            // Se crea tabla
+            writer.write("<table border='1'>");
+            writer.write("<tr bgcolor=orange><th>Lexema</th><th>Descripción</th><th>Línea</th><th>Columna</th></tr>");
+
+            // Se obtienen los atributos y se itera para obtenerlos en la tabla
+            for (ReporteErrorSp error : ReporteErrorSp.errorListSP) {
+                writer.write("<tr>");
+                writer.write("<td>" + error.getLexema() + "</td>");
+                writer.write("<td>" + error.getDescripcion() + "</td>");
+                writer.write("<td>" + error.getLinea() + "</td>");
+                writer.write("<td>" + error.getColumna() + "</td>");
+                writer.write("</tr>");
+            }
+
+            // Se cierra el HTML
+            writer.write("</table>");
+            writer.write("</center>");
+            writer.write("</body>");
+            writer.write("</html>");
+
+            //Se cierra el writer
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, "Reporte de errores generado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte de errores.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // BOTON PARA GENERAR REPORTE DE TOKENS HTML - STATPY
+
+               // Se verifica si hay errores dentro del la lista de errores
+        if (ReporteTokenSp.tokenListSP.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay tokens para reportar.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            // Se crea un File Writer, para poder crear el archivo html de errores
+            FileWriter htmlFileWriter = new FileWriter("REPORTE_TOKENS_STATPY_202110206.HTML");
+
+            // Se crea un Buffered Writer
+            BufferedWriter writer = new BufferedWriter(htmlFileWriter);
+
+            // Header de un HTML
+            writer.write("<html>");
+            writer.write("<head><title>Tokens StatPy - 202110206</title></head>");
+            writer.write("<body>");
+            writer.write("<center>");
+            writer.write("<h1>Reporte de Tokens - StatPy</h1>");
+
+            // Se crea tabla
+            writer.write("<table border='1'>");
+            writer.write("<tr bgcolor=orange><th>Lexema</th><th>Token</th><th>Línea</th><th>Columna</th></tr>");
+
+            // Se obtienen los atributos y se itera para obtenerlos en la tabla
+            for (ReporteTokenSp token : ReporteTokenSp.tokenListSP) {
+                writer.write("<tr>");
+                writer.write("<td>" + token.getLexema() + "</td>");
+                writer.write("<td>" + token.getToken() + "</td>");
+                writer.write("<td>" + token.getLinea() + "</td>");
+                writer.write("<td>" + token.getColumna() + "</td>");
+                writer.write("</tr>");
+            }
+
+            // Se cierra el HTML
+            writer.write("</table>");
+            writer.write("</center>");
+            writer.write("</body>");
+            writer.write("</html>");
+
+            //Se cierra el writer
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, "Reporte de tokens generado correctamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte de tokens.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+             
+        
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -536,6 +805,10 @@ public class Maininterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -546,14 +819,11 @@ public class Maininterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;

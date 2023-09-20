@@ -8,6 +8,7 @@ package AnalizadorStatpy;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
+import ReportesHtml.ReporteErrorSp;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -639,6 +640,17 @@ public class SintacticoStatpy extends java_cup.runtime.lr_parser {
 
 
     public void syntax_error(Symbol s){
+        String lexema = (String) s.value;
+        String descripcion = "Error sintáctico";
+        int linea = s.left + 1;
+        int columna = s.right + 1;
+
+        // crear objeto de reporte error
+        ReporteErrorSp error = new ReporteErrorSp(lexema, descripcion, linea, columna);
+
+        // se añade error a la lista de errores
+        ReporteErrorSp.errorListSP.add(error);
+
         System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 

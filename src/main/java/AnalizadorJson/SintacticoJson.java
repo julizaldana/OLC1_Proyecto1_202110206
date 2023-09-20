@@ -5,9 +5,11 @@
 
 package AnalizadorJson;
 
+import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
-import java_cup.runtime.*;
+import ReportesHtml.ReporteError;
+import ReportesHtml.ReporteToken;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -112,18 +114,28 @@ public class SintacticoJson extends java_cup.runtime.lr_parser {
 
 
     public void syntax_error(Symbol s){
+        String lexema = (String) s.value;
+        String descripcion = "Error sintáctico";
+        int linea = s.left + 1;
+        int columna = s.right + 1;
+
+        // Create an ErrorEntry object
+        ReporteError error = new ReporteError(lexema, descripcion, linea, columna);
+
+        // Add the error to the list
+        ReporteError.errorList.add(error);
+
         System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
         System.out.println("Error sintáctico: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
+
     String tmp="";
 
-    //Clases, objetos, variables, lista, etc... en sintaxis java
-    
-    //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
-    public List<String> resultados = new ArrayList<String>();
+        // Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
+        public List<String> resultados = new ArrayList<String>();
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
