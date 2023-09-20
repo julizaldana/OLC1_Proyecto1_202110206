@@ -29,13 +29,13 @@ import ReportesHtml.ReporteErrorSp;
 import ReportesHtml.ReporteTokenSp;
 
 
+
 /**
  *
  * @author juliz
  */
 public class Maininterface extends javax.swing.JFrame {
-  
-       
+    
     private CardLayout cardLayout;
     private String panelActual = "jsonPanel";
     
@@ -57,9 +57,12 @@ public class Maininterface extends javax.swing.JFrame {
         //Se bloque jtextarea3
         jTextArea3.setEditable(false);
        
-        
+            
     }
 
+   
+
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -524,6 +527,8 @@ public class Maininterface extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // BOTON PARA GUARDAR ARCHIVO Y ACTUALIZARLO
+     
+       
         
         
         
@@ -531,8 +536,7 @@ public class Maininterface extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // BOTON PARA GUARDAR COMO... 
-        
-        
+
         
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed

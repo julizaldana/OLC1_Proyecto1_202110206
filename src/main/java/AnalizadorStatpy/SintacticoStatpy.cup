@@ -3,6 +3,7 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import ReportesHtml.ReporteErrorSp;
+import GraficasJava.*;
 
 
 parser code {:
@@ -27,6 +28,18 @@ parser code {:
     String tmp="";
     String opr="";
 
+// Se define lo siguiente para graficar
+
+    public GraficarBarras gb = new GraficarBarras();    
+    public GraficaPie gp = new GraficaPie();
+    public TS ts = new TS();
+    private ArrayList<Double> Values = new ArrayList<Double>();
+    private ArrayList<String> ValuesX = new ArrayList<String>();
+    String titulo;
+    String titulox;
+    String tituloy;
+
+
 
 //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultadosSP = new ArrayList<String>();
@@ -43,9 +56,11 @@ parser code {:
 
 terminal String ID,ENTERO,CADENA,INT1,CHAR1,DOUBLE1,BOOL1,STRING1,PUB,PRI,VOI,MAIN,PUNTO,DOSP,CONSOLE,WRITE,DOUBLE,DECIMAL,comentario,comentario2;
 terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, DIST, AND, OR, NOT;
-terminal String COMILLA_S;
+terminal String NEWVALOR,RGB,RGP,RDG,REjex,RValores,RTitulo,RTituloY,RTituloX;
+terminal String COMILLA_S,DOLAR,CORCH_A,CORCH_C;
 terminal String IF, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, FOR, WHILE, DO;
-terminal PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
+terminal String decimales, cadenas, iden;
+terminal String PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
 nonterminal String TIPO, EXPRESION, OPERACION, OP, SIGNO, VARPRINT, TERMINO, COMENTARIOS;
@@ -54,7 +69,10 @@ nonterminal String IFSTATE, ELIFSTATE, IFARG, ELIFARG, OPERIFS, SUPERNOT, CUERPO
 nonterminal String FORSTATE, OPERFOR, CUERPOFOR, MOREFORS;
 nonterminal String WHILESTATE, CUERPOWHILE, WHILESTATEIF;
 nonterminal String DOWHILESTATE,CUERPODOWHILE, OPERADOR,DOWHILEIF,WHILEDOWHILE;
+nonterminal String RGB_STATE,RGP_STATE,RDG_STATE;
+nonterminal INSTRUCCIONESFUNC, INSTRUCCIONFUNC, LISTAEJEX,LISTAVALORES, ELEMENTOSEJEX, ELEMENTOSVALORES;
 nonterminal  INICIO, SENTENCIAS, S, CUERPO, C, L;
+
 
 start with INICIO;
 
@@ -138,6 +156,9 @@ C ::= TIPO:tip ID:id PYCOMA
     | SWITCHSTATE
     | FORSTATE  DOWHILESTATE
     | WHILESTATE
+    | RGB_STATE
+    | RGP_STATE
+    | RDG_STATE
     | comentario:com
                 {:
                     tmp+=com;
@@ -744,15 +765,71 @@ DOWHILEIF ::= MOREIFS:ifstate1 MORELIFS:elif
 
 
 
-/* VARIABLES GLOBALES */
-
-
-
-
-
-
-
-
-
-
 /* FUNCIONES ESTADÍSTICAS */
+
+
+RGB_STATE ::= RGB PAR_A PAR_C LLAV_A INSTRUCCIONESFUNC LLAV_C {:
+    gb.Graficar(titulo,titulox,tituloy,ValuesX,Values);
+    titulo="";
+    ValuesX.clear();
+    Values.clear();
+
+:}
+    
+;
+
+RGP_STATE ::= RGP PAR_A  PAR_C LLAV_A INSTRUCCIONESFUNC LLAV_C {:
+         gp.Graficar(titulo, ValuesX, Values);
+         titulo="";
+         ValuesX.clear();
+         Values.clear();
+         
+:}
+    
+
+;
+
+RDG_STATE ::= RDG PAR_A PAR_C LLAV_A INSTRUCCIONESFUNC LLAV_C
+
+
+;
+
+INSTRUCCIONESFUNC ::= INSTRUCCIONESFUNC INSTRUCCIONFUNC
+
+    | INSTRUCCIONFUNC 
+
+;
+
+INSTRUCCIONFUNC ::= RTitulo ASIGNA cadenas:a {: titulo = (String)a; :} PYCOMA
+                                |RTitulo ASIGNA iden:a {: titulo = ts.get(a);  :} PYCOMA
+                                | REjex ASIGNA LLAV_A LISTAEJEX LLAV_C PYCOMA
+                                | RValores ASIGNA LLAV_A LISTAVALORES  LLAV_C PYCOMA
+                                | RTituloX ASIGNA cadenas:a {: titulox=(String)a;:} PYCOMA
+                                | RTituloX ASIGNA iden:a {: titulox= ts.get(a); :} PYCOMA
+                                | RTituloY ASIGNA cadenas:a {:tituloy=(String)a;:} PYCOMA
+                                | RTituloY ASIGNA iden:a {:tituloy=ts.get(a); :} PYCOMA
+                                | iden:a ASIGNA cadenas:b   {: ts.add(a,b); :}PYCOMA
+                                | iden:a ASIGNA decimales:b {: ts.add(a,b); :}PYCOMA
+;
+LISTAEJEX ::= LISTAEJEX COMA ELEMENTOSEJEX:a {: ValuesX.add((String)a); :}
+                    | ELEMENTOSEJEX:a  {: ValuesX.add((String)a); RESULT = ValuesX; :}
+
+;
+LISTAVALORES ::= LISTAVALORES COMA ELEMENTOSVALORES:a {: Values.add((Double)a); :}
+                            |ELEMENTOSVALORES:a  {: Values.add((Double)a); RESULT = Values; :}
+
+;
+ELEMENTOSEJEX ::= cadenas:a {: RESULT= a; :}
+                                    | iden:a {:  RESULT = ts.get(a);  :}
+;
+ELEMENTOSVALORES ::= decimales:a {: RESULT= Double.parseDouble(a); :}
+                                    | iden:a {:  RESULT = Double.parseDouble(ts.get(a));  :}
+;
+
+
+
+
+
+
+
+

@@ -53,6 +53,19 @@ FOR = "for"
 WHILE = "while"
 DO = "do"
 
+//palabras reservadas graficas
+
+NEWVALOR = "NewValor"
+RGB = "void graficabarras"
+RGP = "void graficapie"
+RDG = "void definirglobales"
+REjex = "ejex"
+RValores = "valores"
+RTitulo = "titulo"
+RTituloY = "tituloy"
+RTituloX = "titulox"
+
+
 
 //operadores aritmeticos
 SUMA = "+"
@@ -76,6 +89,9 @@ NOT = "!"
 
 //caracteres
 COMILLA_S = "'"
+DOLAR = "$"
+CORCH_A = "["
+CORCH_C = "]"
 
 //expresiones regulares
 
@@ -86,6 +102,13 @@ ID = [A-Za-zñÑ][_0-9A-Za-zñÑ]*
 blancos = [ \t\r\n\f]+
 comentario=("//".*\n)|("//".*\r)
 comentario2=("/" "*"[^\*]* "*""/")
+
+decimales=[0-9]+("."[0-9]+)
+cadenas=(\" [^\"]* \")
+enteros = [0-9]
+letras = [a-zA-Z]
+identificador = {letras}({letras}|"_"|{enteros})*
+
 
 %%
 
@@ -243,6 +266,96 @@ comentario2=("/" "*"[^\*]* "*""/")
                         ReporteTokenSp token = new ReporteTokenSp (yytext()," DO_R ",yyline+1,yycolumn+1);
                         ReporteTokenSp.tokenListSP.add(token);
                         return new Symbol(sym.DO, yyline, yycolumn,yytext());}
+
+
+<YYINITIAL> {NEWVALOR}      { System.out.println("Reconocio "+yytext()+" NEW_VALOR " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," NEW_VALOR ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.NEWVALOR, yyline, yycolumn,yytext());}
+
+
+<YYINITIAL> {RGB}      { System.out.println("Reconocio "+yytext()+" RGB " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," R_GRAF_BARRA ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RGB, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RGP}      { System.out.println("Reconocio "+yytext()+" RGP " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," R_GRAF_PIE ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RGP, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RDG}      { System.out.println("Reconocio "+yytext()+" RDG " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," R_DEF_GLOBAL ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RDG, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {REjex}      { System.out.println("Reconocio "+yytext()+" REjex " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," REjex ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.REjex, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RValores}      { System.out.println("Reconocio "+yytext()+" RValores " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," RValores ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RValores, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RTitulo}      { System.out.println("Reconocio "+yytext()+" RTitulo " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," RTitulo ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RTitulo, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RTituloY}      { System.out.println("Reconocio "+yytext()+" RTituloY " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," RTituloY ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RTituloY, yyline, yycolumn,yytext());}
+
+<YYINITIAL> {RTituloX}      { System.out.println("Reconocio "+yytext()+" RTituloX " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," RTituloX ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.RTituloX, yyline, yycolumn,yytext());}
+
+
+
+
+<YYINITIAL> {DOLAR}      { System.out.println("Reconocio "+yytext()+" SIMBOLO_DOLAR " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," SIMBOLO_DOLAR ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.DOLAR, yyline, yycolumn,yytext());}
+
+
+
+<YYINITIAL> {CORCH_A}      { System.out.println("Reconocio "+yytext()+" CORCH_A " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," CORCH_A ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.CORCH_A, yyline, yycolumn,yytext());}
+
+
+<YYINITIAL> {CORCH_C}      { System.out.println("Reconocio "+yytext()+" CORCH_C " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," CORCH_C ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.CORCH_C, yyline, yycolumn,yytext());}
+
+
+
+
+<YYINITIAL> {decimales}      { System.out.println("Reconocio "+yytext()+" decimal " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," N_decimal ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.decimales, yyline, yycolumn,yytext());}
+
+
+<YYINITIAL> {cadenas}      { System.out.println("Reconocio "+yytext()+" cadena " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," cadena ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.cadenas, yyline, yycolumn,yytext());}
+
+
+<YYINITIAL> {identificador}      { System.out.println("Reconocio "+yytext()+" Graf_identificador " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteTokenSp token = new ReporteTokenSp (yytext()," GRAF_identificador ",yyline+1,yycolumn+1);
+                        ReporteTokenSp.tokenListSP.add(token);
+                        return new Symbol(sym.iden, yyline, yycolumn,yytext());}
+
+
 
 
 <YYINITIAL> {PAR_A}     {System.out.println("Reconocio "+yytext()+" PAR_ABRE " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
