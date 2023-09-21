@@ -12,8 +12,8 @@ public class sym {
   public static final int EOF = 0;
   public static final int STRING = 3;
   public static final int LLAV_C = 8;
-  public static final int DOUBLE = 5;
-  public static final int LLAV_A = 4;
+  public static final int DOUBLE = 4;
+  public static final int LLAV_A = 5;
   public static final int error = 1;
   public static final int DOSPTS = 7;
   public static final int COMILLA = 2;
@@ -22,8 +22,8 @@ public class sym {
   "error",
   "COMILLA",
   "STRING",
-  "LLAV_A",
   "DOUBLE",
+  "LLAV_A",
   "COMA",
   "DOSPTS",
   "LLAV_C"

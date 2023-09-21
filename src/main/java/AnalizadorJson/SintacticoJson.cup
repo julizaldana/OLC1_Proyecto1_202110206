@@ -28,6 +28,7 @@ parser code {:
 
     String tmp="";
 
+
         // Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
         public List<String> resultados = new ArrayList<String>();
 :}
@@ -37,9 +38,8 @@ parser code {:
 
 /* Terminales */
 terminal COMILLA;
-terminal STRING;
+terminal String STRING, DOUBLE;
 terminal LLAV_A;
-terminal DOUBLE;
 terminal COMA;
 terminal DOSPTS;
 terminal LLAV_C;
@@ -55,13 +55,20 @@ inicio ::= LLAV_A elementos LLAV_C;
 elementos ::= elemento
             | elementos COMA elemento;
 
-elemento ::= clave DOSPTS valor;
+elemento ::= STRING:clave DOSPTS DOUBLE:valor
+            {:
+                    JsonHashTable.add(clave,valor);
+                    String clav = JsonHashTable.get(clave);
+                    System.out.println("Added key: " + clave + ", value: " + valor + " to jsonHash");           
+                    System.out.println(clav);
+            :}
+    | STRING:clave1 DOSPTS STRING:valor1
+            {:
+                    JsonHashTable.add(clave1,valor1);
+                    String clav1 = JsonHashTable.get(clave1);
+                    System.out.println("Added key: " + clave1 + ", value: " + valor1 + " to jsonHash");         
+                    System.out.println(clav1);                 
+            :}
+;
 
-clave ::= STRING;
 
-valor ::= STRING
-        | DOUBLE
-        | LLAV_A lista LLAV_C;
-
-lista ::= valor
-        | lista COMA valor;

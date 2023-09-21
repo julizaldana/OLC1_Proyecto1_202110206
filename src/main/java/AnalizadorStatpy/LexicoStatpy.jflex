@@ -338,24 +338,6 @@ identificador = {letras}({letras}|"_"|{enteros})*
 
 
 
-<YYINITIAL> {decimales}      { System.out.println("Reconocio "+yytext()+" decimal " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
-                        ReporteTokenSp token = new ReporteTokenSp (yytext()," N_decimal ",yyline+1,yycolumn+1);
-                        ReporteTokenSp.tokenListSP.add(token);
-                        return new Symbol(sym.decimales, yyline, yycolumn,yytext());}
-
-
-<YYINITIAL> {cadenas}      { System.out.println("Reconocio "+yytext()+" cadena " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
-                        ReporteTokenSp token = new ReporteTokenSp (yytext()," cadena ",yyline+1,yycolumn+1);
-                        ReporteTokenSp.tokenListSP.add(token);
-                        return new Symbol(sym.cadenas, yyline, yycolumn,yytext());}
-
-
-<YYINITIAL> {identificador}      { System.out.println("Reconocio "+yytext()+" Graf_identificador " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
-                        ReporteTokenSp token = new ReporteTokenSp (yytext()," GRAF_identificador ",yyline+1,yycolumn+1);
-                        ReporteTokenSp.tokenListSP.add(token);
-                        return new Symbol(sym.iden, yyline, yycolumn,yytext());}
-
-
 
 
 <YYINITIAL> {PAR_A}     {System.out.println("Reconocio "+yytext()+" PAR_ABRE " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  

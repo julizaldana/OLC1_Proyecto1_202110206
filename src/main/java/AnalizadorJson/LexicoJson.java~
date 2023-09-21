@@ -627,53 +627,54 @@ public class LexicoJson implements java_cup.runtime.Scanner {
             { String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);
         System.out.println(errLex);
 
-        String lexema = yytext(); // Lexema is yytext()
+        String lexema = yytext(); // Lexema es yytext()
         String descripcion = "Error léxico";
         int linea = yyline + 1;
         int columna = yycolumn + 1;
 
         ReporteError error = new ReporteError(lexema, descripcion, linea, columna);
-        // Access the parser's errorList and add errors
+        // Se añade a la lista de errores
         ReporteError.errorList.add(error);
             } 
             // fall through
           case 12: break;
           case 2: 
-            { System.out.println("Reconocio "+yytext()+" comilla" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) ); return new Symbol(sym.COMILLA, yyline, yycolumn,yytext()); 
-                                String lexema = yytext(); // Lexema is yytext()
-                                String token = " comilla ";
-                                int linea = yyline + 1;
-                                int columna = yycolumn + 1;
-                        ReporteToken token1 = new ReporteToken(lexema,token,linea,columna);
-                        ReporteToken.tokenList.add(token1);
+            { System.out.println("Reconocio "+yytext()+" comilla" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteToken token = new ReporteToken (yytext()," comilla ",yyline+1,yycolumn+1);
+                        ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.COMILLA, yyline, yycolumn,yytext());
             } 
             // fall through
           case 13: break;
           case 3: 
-            { System.out.println("Reconocio "+yytext()+" llave que abre" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.LLAV_A, yyline, yycolumn,yytext());
+            { System.out.println("Reconocio "+yytext()+" llave que abre" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," llave que abre ",yyline+1,yycolumn+1);
                         ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.LLAV_A, yyline, yycolumn,yytext());
             } 
             // fall through
           case 14: break;
           case 4: 
-            { System.out.println("Reconocio "+yytext()+" llave que cierra" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.LLAV_C, yyline, yycolumn,yytext());
+            { System.out.println("Reconocio "+yytext()+" llave que cierra" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," llave que cierra",yyline+1,yycolumn+1);
                         ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.LLAV_C, yyline, yycolumn,yytext());
             } 
             // fall through
           case 15: break;
           case 5: 
-            { System.out.println("Reconocio "+yytext()+" coma" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.COMA, yyline, yycolumn,yytext());
+            { System.out.println("Reconocio "+yytext()+" coma" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," coma",yyline+1,yycolumn+1);
-                        ReporteToken.tokenList.add(token);
+                        ReporteToken.tokenList.add(token);    
+                        return new Symbol(sym.COMA, yyline, yycolumn,yytext());
             } 
             // fall through
           case 16: break;
           case 6: 
-            { System.out.println("Reconocio "+yytext()+" dos puntos" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.DOSPTS, yyline, yycolumn,yytext());
+            { System.out.println("Reconocio "+yytext()+" dos puntos" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," dos puntos",yyline+1,yycolumn+1);
                         ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.DOSPTS, yyline, yycolumn,yytext());
             } 
             // fall through
           case 17: break;
@@ -683,16 +684,18 @@ public class LexicoJson implements java_cup.runtime.Scanner {
             // fall through
           case 18: break;
           case 8: 
-            { System.out.println("Reconocio "+yytext()+" cadena" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.STRING, yyline, yycolumn,yytext());
+            { System.out.println("Reconocio "+yytext()+" cadena" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," cadena",yyline+1,yycolumn+1);
                         ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.STRING, yyline, yycolumn,yytext());
             } 
             // fall through
           case 19: break;
           case 9: 
-            { System.out.println("Reconocio "+yytext()+" double" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); return new Symbol(sym.DOUBLE, yyline, yycolumn,yytext()); 
+            { System.out.println("Reconocio "+yytext()+" double" + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1)); 
                         ReporteToken token = new ReporteToken (yytext()," double",yyline+1,yycolumn+1);
                         ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.DOUBLE, yyline, yycolumn,yytext());
             } 
             // fall through
           case 20: break;

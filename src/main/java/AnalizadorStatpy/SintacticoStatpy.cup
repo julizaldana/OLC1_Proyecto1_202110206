@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ReportesHtml.ReporteErrorSp;
 import GraficasJava.*;
+import AnalizadorJson.*;
 
 
 parser code {:
@@ -39,8 +40,6 @@ parser code {:
     String titulox;
     String tituloy;
 
-
-
 //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultadosSP = new ArrayList<String>();
 
@@ -59,7 +58,6 @@ terminal String SUMA, RESTA, MULT, DIV, MAYOR, MENOR, MAYOR_I, MENOR_I, IGUAL, D
 terminal String NEWVALOR,RGB,RGP,RDG,REjex,RValores,RTitulo,RTituloY,RTituloX;
 terminal String COMILLA_S,DOLAR,CORCH_A,CORCH_C;
 terminal String IF, ELSEIF, SWITCH, CASE, BREAK, DEFAULT, FOR, WHILE, DO;
-terminal String decimales, cadenas, iden;
 terminal String PAR_A, PAR_C, LLAV_A, LLAV_C, COMA, PYCOMA,ASIGNA;
 
 
@@ -794,22 +792,29 @@ RDG_STATE ::= RDG PAR_A PAR_C LLAV_A INSTRUCCIONESFUNC LLAV_C
 
 ;
 
-INSTRUCCIONESFUNC ::= INSTRUCCIONESFUNC INSTRUCCIONFUNC
+INSTRUCCIONESFUNC ::= INSTRUCCIONESFUNC TIPO INSTRUCCIONFUNC
 
-    | INSTRUCCIONFUNC 
+    | TIPO INSTRUCCIONFUNC 
 
 ;
 
-INSTRUCCIONFUNC ::= RTitulo ASIGNA cadenas:a {: titulo = (String)a; :} PYCOMA
-                                |RTitulo ASIGNA iden:a {: titulo = ts.get(a);  :} PYCOMA
-                                | REjex ASIGNA LLAV_A LISTAEJEX LLAV_C PYCOMA
-                                | RValores ASIGNA LLAV_A LISTAVALORES  LLAV_C PYCOMA
-                                | RTituloX ASIGNA cadenas:a {: titulox=(String)a;:} PYCOMA
-                                | RTituloX ASIGNA iden:a {: titulox= ts.get(a); :} PYCOMA
-                                | RTituloY ASIGNA cadenas:a {:tituloy=(String)a;:} PYCOMA
-                                | RTituloY ASIGNA iden:a {:tituloy=ts.get(a); :} PYCOMA
-                                | iden:a ASIGNA cadenas:b   {: ts.add(a,b); :}PYCOMA
-                                | iden:a ASIGNA decimales:b {: ts.add(a,b); :}PYCOMA
+INSTRUCCIONFUNC ::= RTitulo ASIGNA CADENA:a {: titulo = (String)a; :} PYCOMA
+                                |RTitulo ASIGNA ID:a {: titulo = ts.get(a);  :} PYCOMA
+                                | CORCH_A CORCH_C REjex ASIGNA LLAV_A LISTAEJEX LLAV_C PYCOMA
+                                | CORCH_A CORCH_C RValores ASIGNA LLAV_A LISTAVALORES  LLAV_C PYCOMA
+                                | RTituloX ASIGNA CADENA:a {: titulox=(String)a;:} PYCOMA
+                                | RTituloX ASIGNA ID:a {: titulox= ts.get(a); :} PYCOMA
+                                | RTituloY ASIGNA CADENA:a {:tituloy=(String)a;:} PYCOMA
+                                | RTituloY ASIGNA ID:a {:tituloy=ts.get(a); :} PYCOMA
+                                | ID:a ASIGNA CADENA:b   {: ts.add(a,b); :}PYCOMA
+                                | ID:a ASIGNA DOLAR LLAV_A NEWVALOR COMA CADENA COMA CADENA:clavejson LLAV_C {:  String value = JsonHashTable.get(clavejson); 
+
+if (value != null) {
+    ts.add(a, value); 
+} else {
+    System.out.println("error");
+} :}PYCOMA
+                                | ID:a ASIGNA DOUBLE:b {: ts.add(a,b); :}PYCOMA
 ;
 LISTAEJEX ::= LISTAEJEX COMA ELEMENTOSEJEX:a {: ValuesX.add((String)a); :}
                     | ELEMENTOSEJEX:a  {: ValuesX.add((String)a); RESULT = ValuesX; :}
@@ -819,11 +824,11 @@ LISTAVALORES ::= LISTAVALORES COMA ELEMENTOSVALORES:a {: Values.add((Double)a); 
                             |ELEMENTOSVALORES:a  {: Values.add((Double)a); RESULT = Values; :}
 
 ;
-ELEMENTOSEJEX ::= cadenas:a {: RESULT= a; :}
-                                    | iden:a {:  RESULT = ts.get(a);  :}
+ELEMENTOSEJEX ::= CADENA:a {: RESULT= a; :}
+                                    | ID:a {:  RESULT = ts.get(a);  :}
 ;
-ELEMENTOSVALORES ::= decimales:a {: RESULT= Double.parseDouble(a); :}
-                                    | iden:a {:  RESULT = Double.parseDouble(ts.get(a));  :}
+ELEMENTOSVALORES ::= DOUBLE:a {: RESULT= Double.parseDouble(a); :}
+                                    | ID:a {:  RESULT = Double.parseDouble(ts.get(a));  :}
 ;
 
 

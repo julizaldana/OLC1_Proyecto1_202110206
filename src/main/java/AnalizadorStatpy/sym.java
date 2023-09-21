@@ -18,7 +18,6 @@ public class sym {
   public static final int PRI = 11;
   public static final int FOR = 54;
   public static final int WRITE = 17;
-  public static final int decimales = 57;
   public static final int PUB = 10;
   public static final int NOT = 34;
   public static final int AND = 32;
@@ -29,18 +28,17 @@ public class sym {
   public static final int STRING1 = 9;
   public static final int REjex = 39;
   public static final int DIV = 25;
-  public static final int iden = 59;
-  public static final int ASIGNA = 66;
+  public static final int ASIGNA = 63;
   public static final int CHAR1 = 6;
   public static final int SUMA = 22;
   public static final int RTituloY = 42;
   public static final int IF = 48;
   public static final int RTituloX = 43;
   public static final int MAIN = 13;
-  public static final int LLAV_C = 63;
+  public static final int LLAV_C = 60;
   public static final int ID = 2;
-  public static final int LLAV_A = 62;
-  public static final int PYCOMA = 65;
+  public static final int LLAV_A = 59;
+  public static final int PYCOMA = 62;
   public static final int RTitulo = 41;
   public static final int RGP = 37;
   public static final int DIST = 31;
@@ -49,13 +47,13 @@ public class sym {
   public static final int DECIMAL = 19;
   public static final int error = 1;
   public static final int MAYOR_I = 28;
-  public static final int COMA = 64;
+  public static final int COMA = 61;
   public static final int CADENA = 4;
   public static final int RDG = 38;
   public static final int MENOR = 27;
-  public static final int PAR_C = 61;
+  public static final int PAR_C = 58;
   public static final int COMILLA_S = 44;
-  public static final int PAR_A = 60;
+  public static final int PAR_A = 57;
   public static final int BREAK = 52;
   public static final int MENOR_I = 29;
   public static final int RGB = 36;
@@ -64,7 +62,6 @@ public class sym {
   public static final int PUNTO = 14;
   public static final int WHILE = 55;
   public static final int DEFAULT = 53;
-  public static final int cadenas = 58;
   public static final int DOSP = 15;
   public static final int comentario = 20;
   public static final int NEWVALOR = 35;
@@ -133,9 +130,6 @@ public class sym {
   "FOR",
   "WHILE",
   "DO",
-  "decimales",
-  "cadenas",
-  "iden",
   "PAR_A",
   "PAR_C",
   "LLAV_A",

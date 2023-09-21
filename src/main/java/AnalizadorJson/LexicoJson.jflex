@@ -31,13 +31,16 @@ COMA = ","
 DOSPTS = ":"
 
 
-//palabras reservadas
-
-
 //expresiones regulares
 
 DOUBLE = [0-9]+.[0-9]
 STRING = \"[^\"]*\" 
+
+cadenas=(\" [^\"]* \")
+
+
+
+
 blancos = [ \t\r\n\f]+
 comentario=("//".*\n)|("//".*\r)
 comentario2=("/" "*"[^\*]* "*""/")
@@ -80,6 +83,23 @@ comentario2=("/" "*"[^\*]* "*""/")
                         ReporteToken.tokenList.add(token);
                         return new Symbol(sym.DOUBLE, yyline, yycolumn,yytext()); 
             }
+
+
+
+
+
+<YYINITIAL> {cadenas}      { System.out.println("Reconocio "+yytext()+" cadena " + " en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1) );  
+                        ReporteToken token = new ReporteToken (yytext()," cadena ",yyline+1,yycolumn+1);
+                        ReporteToken.tokenList.add(token);
+                        return new Symbol(sym.cadenas, yyline, yycolumn,yytext());}
+
+
+
+
+
+
+
+
 
 
 {blancos} {}

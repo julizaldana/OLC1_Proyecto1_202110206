@@ -627,13 +627,13 @@ public class LexicoJson implements java_cup.runtime.Scanner {
             { String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);
         System.out.println(errLex);
 
-        String lexema = yytext(); // Lexema is yytext()
+        String lexema = yytext(); // Lexema es yytext()
         String descripcion = "Error léxico";
         int linea = yyline + 1;
         int columna = yycolumn + 1;
 
         ReporteError error = new ReporteError(lexema, descripcion, linea, columna);
-        // Access the parser's errorList and add errors
+        // Se añade a la lista de errores
         ReporteError.errorList.add(error);
             } 
             // fall through
